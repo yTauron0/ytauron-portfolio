@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>yTauron — Minecraft Builder Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg-a"></div>
+  <div class="hero-bg-b"></div>
+  <div class="hero-overlay"></div>
+  <canvas id="particles"></canvas>
+
+  <div class="hero-content">
+    <div class="panel">
+      <div class="rama">
+        <svg viewBox="0 0 220 170" fill="none">
+          <path d="M210,10 C170,20 150,45 120,55 C90,65 70,80 55,95" stroke="#6b4a2a" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+          <circle cx="205" cy="14" r="5" fill="#ffb057" opacity="0.9"/>
+          <circle cx="180" cy="26" r="7" fill="#ffd27a" opacity="0.85"/>
+          <circle cx="155" cy="20" r="4" fill="#ffb057" opacity="0.7"/>
+          <circle cx="130" cy="48" r="6" fill="#ffd27a" opacity="0.8"/>
+          <circle cx="95" cy="72" r="5" fill="#ffb057" opacity="0.75"/>
+        </svg>
+      </div>
+
+      <div class="eyebrow"><span class="dot"></span>available for commissions</div>
+      <h1 id="title"></h1>
+      <p class="tagline">Builder since 2021 — structures, lobbies, and PvP arenas with a signature style.</p>
+      <div class="cta-row">
+        <a href="#about" class="btn btn-primary">View Portfolio</a>
+        <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid">
+
+    <div class="panel about-text">
+      <span class="eyebrow"><span class="dot"></span>about</span>
+      <h2>Who's behind the builds</h2>
+      <p>
+        Builder since 2021, specialized in structures — from lobbies and Box PvP arenas
+        to larger, detail-heavy projects. I work with professional tools like
+        <strong>Axiom</strong>, <strong>WorldEdit</strong>, <strong>Arceon</strong>,
+        <strong>VoxelSniper</strong>, and <strong>GoBrush</strong> to deliver clean,
+        commission-ready results without losing character or detail along the way.
+      </p>
+    </div>
+
+    <div class="panel discord-card">
+      <div class="discord-avatar-wrap">
+        <img id="discordAvatar" class="discord-avatar" src="" alt="Discord avatar">
+        <span id="discordStatusDot" class="discord-status-dot"></span>
+      </div>
+      <div class="discord-name" id="discordName">Loading...</div>
+      <div class="discord-label">builder on Discord</div>
+      <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost btn-small">Add me</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="music-card">
+  <iframe
+    style="border-radius:12px"
+    src="https://open.spotify.com/embed/playlist/PLAYLIST_ID_AQUI?utm_source=generator&theme=0"
+    width="100%"
+    height="152"
+    frameBorder="0"
+    allowfullscreen=""
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy">
+  </iframe>
+</div>
+
+<div class="visit-counter" id="visitCounter">
+  <span class="visit-dot"></span>
+  <span id="visitCount">—</span> visits
+</div>
+
+<script src="js/script.js" defer></script>
+<script data-goatcounter="https://ytauron-portfolio.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

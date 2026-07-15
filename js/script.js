@@ -1,99 +1,130 @@
-// título letra por letra
-const title = document.getElementById('title');
-const word = "yTauron";
-[...word].forEach((ch,i)=>{
-  const s = document.createElement('span');
-  s.textContent = ch;
-  s.style.animationDelay = (0.15 + i*0.06)+'s';
-  title.appendChild(s);
-});
-
-// partículas: brasas + pétalos
-const pc = document.getElementById('particles');
-const ctx = pc.getContext('2d');
-function sizeCanvas(){ pc.width = window.innerWidth; pc.height = window.innerHeight; }
-sizeCanvas();
-window.addEventListener('resize', sizeCanvas);
+// ==================================================
+// yTauron Portfolio — script.js
+// ==================================================
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const N = reduceMotion ? 0 : 40;
-const parts = Array.from({length:N}, ()=>{
-  const depth = Math.random();
-  const isPetal = Math.random() > 0.55;
-  return {
-    x: Math.random()*pc.width, y: Math.random()*pc.height, depth,
-    r: isPetal ? (2.2+depth*3.5) : (1+depth*2.2),
-    vy: -(0.12+depth*0.35), vx: (Math.random()-0.5)*0.25,
-    sway: Math.random()*Math.PI*2, isPetal,
-    hue: isPetal ? '255,176,120' : '255,209,140'
-  };
-});
-function tick(){
-  ctx.clearRect(0,0,pc.width,pc.height);
-  parts.forEach(p=>{
-    p.sway += 0.01;
-    p.x += p.vx + Math.sin(p.sway)*0.15;
-    p.y += p.vy;
-    if(p.y < -10){ p.y = pc.height+10; p.x = Math.random()*pc.width; }
-    const alpha = 0.15 + p.depth*0.5;
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(${p.hue},${alpha})`;
-    if(p.isPetal){ ctx.ellipse(p.x,p.y,p.r,p.r*0.6,p.sway,0,7); } else { ctx.arc(p.x,p.y,p.r,0,7); }
-    ctx.fill();
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+// ---- Title letter-by-letter animation ----
+(function animateTitle() {
+  const el = document.getElementById('title');
+  const text = 'yTauron';
+  el.textContent = '';
+  text.split('').forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.style.opacity = reduceMotion ? '1' : '0';
+    span.style.display = 'inline-block';
+    span.style.transition = `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s`;
+    span.style.transform = reduceMotion ? 'none' : 'translateY(10px)';
+    el.appendChild(span);
   });
-  requestAnimationFrame(tick);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      [...el.children].forEach(span => {
+        span.style.opacity = '1';
+        span.style.transform = 'translateY(0)';
+      });
+    });
+  });
+})();
+
+// ---- Hero background crossfade every 20s ----
+(function heroCrossfade() {
+  const bgA = document.querySelector('.hero-bg-a');
+  const bgB = document.querySelector('.hero-bg-b');
+  if (!bgA || !bgB || reduceMotion) return;
+
+  let showingA = true;
+  setInterval(() => {
+    showingA = !showingA;
+    bgA.style.opacity = showingA ? '1' : '0';
+    bgB.style.opacity = showingA ? '0' : '1';
+  }, 20000);
+})();
+
+// ---- Particles (embers + petals) ----
+(function particles() {
+  const canvas = document.getElementById('particles');
+  if (!canvas || isCoarsePointer || reduceMotion) return;
+  const ctx = canvas.getContext('2d');
+  let w, h;
+
+  function resize() {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const COUNT = 46;
+  const particlesArr = Array.from({ length: COUNT }, () => spawn());
+
+  function spawn() {
+    const depth = Math.random();
+    return {
+      x: Math.random() * w,
+      y: h + Math.random() * h,
+      r: 1 + depth * 2.5,
+      speed: 0.15 + depth * 0.5,
+      drift: (Math.random() - 0.5) * 0.4,
+      opacity: 0.2 + depth * 0.6,
+      hue: Math.random() > 0.7 ? '188, 212, 255' : '255, 176, 87'
+    };
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    particlesArr.forEach(p => {
+      p.y -= p.speed;
+      p.x += p.drift;
+      if (p.y < -10) Object.assign(p, spawn(), { y: h + 10 });
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.hue}, ${p.opacity})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+// ---- Discord live profile (Lanyard) ----
+const DISCORD_USER_ID = '847591632890363954';
+
+async function updateDiscordCard() {
+  try {
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
+    const json = await res.json();
+    if (!json.success) return;
+
+    const data = json.data;
+    const user = data.discord_user;
+    const avatarExt = user.avatar && user.avatar.startsWith('a_') ? 'gif' : 'png';
+    const avatarUrl = user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${avatarExt}?size=128`
+      : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+    const avatarEl = document.getElementById('discordAvatar');
+    const nameEl = document.getElementById('discordName');
+    const dotEl = document.getElementById('discordStatusDot');
+
+    if (avatarEl) avatarEl.src = avatarUrl;
+    if (nameEl) nameEl.textContent = user.global_name || user.username;
+    if (dotEl) dotEl.className = 'discord-status-dot ' + (data.discord_status || 'offline');
+  } catch (err) {
+    console.error('No se pudo cargar el perfil de Discord:', err);
+  }
 }
-tick();
 
-// ---- PLAYLIST: "The Boy Is Mine" siempre arranca primero ----
-const playlist = [
-  { title: "Brandy & Monica — The Boy Is Mine", src: "assets/audio/01-the-boy-is-mine.mp3" },
-  { title: "Mariah Carey — My All", src: "assets/audio/02-my-all.mp3" },
-  { title: "Chrystal — The Days", src: "assets/audio/03-the-days.mp3" },
-  { title: "Britney Spears — Gimme More", src: "assets/audio/04-gimme-more.mp3" },
-  { title: "Kreisler/Rachmaninoff — Love's Sorrow", src: "assets/audio/05-loves-sorrow.mp3" }
-];
+updateDiscordCard();
+setInterval(updateDiscordCard, 60000);
 
-let trackIndex = 0;
-const audio = document.getElementById('audioPlayer');
-const playBtn = document.getElementById('playBtn');
-const trackLabel = document.getElementById('playerTrack');
-const volumeSlider = document.getElementById('volumeSlider');
-
-function loadTrack(i){
-  trackIndex = i;
-  audio.src = playlist[trackIndex].src;
-  trackLabel.textContent = playlist[trackIndex].title;
-}
-function playTrack(){ audio.play().catch(()=>{}); playBtn.textContent = "⏸"; }
-function pauseTrack(){ audio.pause(); playBtn.textContent = "▶"; }
-
-loadTrack(0);
-audio.volume = 0.5;
-
-playBtn.addEventListener('click', ()=>{
-  if(audio.paused){ playTrack(); } else { pauseTrack(); }
-});
-document.getElementById('nextBtn').addEventListener('click', ()=>{
-  loadTrack((trackIndex+1) % playlist.length);
-  playTrack();
-});
-document.getElementById('prevBtn').addEventListener('click', ()=>{
-  loadTrack((trackIndex-1+playlist.length) % playlist.length);
-  playTrack();
-});
-audio.addEventListener('ended', ()=>{
-  loadTrack((trackIndex+1) % playlist.length);
-  playTrack();
-});
-volumeSlider.addEventListener('input', (e)=>{ audio.volume = e.target.value; });
-
-// ---- rotación de fondos cada 20s ----
-const bgA = document.querySelector('.hero-bg-a');
-const bgB = document.querySelector('.hero-bg-b');
-let showingA = true;
-setInterval(()=>{
-  showingA = !showingA;
-  bgA.style.opacity = showingA ? 1 : 0;
-  bgB.style.opacity = showingA ? 0 : 1;
-}, 20000);
+// ---- Visit counter (GoatCounter) ----
+fetch('https://ytauron-portfolio.goatcounter.com/counter/TOTAL.json')
+  .then(res => res.json())
+  .then(data => {
+    const el = document.getElementById('visitCount');
+    if (el) el.textContent = data.count;
+  })
+  .catch(err => console.error('No se pudo cargar el contador:', err));

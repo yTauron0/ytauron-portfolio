@@ -1,0 +1,337 @@
+/* ================= Design tokens ================= */
+:root {
+  --bg-deep: #050813;
+  --amber: #ffb057;
+  --amber-soft: #ffd27a;
+  --moon: #bcd4ff;
+  --ink: #f5f1ea;
+  --ink-dim: #a9b3d6;
+  --glass: rgba(20, 26, 46, 0.55);
+  --glass-border: rgba(190, 200, 230, 0.14);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-deep);
+  color: var(--ink);
+  font-family: 'Sora', sans-serif;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ================= Hero ================= */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg-a, .hero-bg-b {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 2.5s var(--ease);
+}
+
+.hero-bg-a {
+  background-image: url('../assets/images/escena-1.jpg');
+  opacity: 1;
+}
+
+.hero-bg-b {
+  background-image: url('../assets/images/escena-2.jpg');
+  opacity: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,8,19,0.35) 0%, rgba(5,8,19,0.55) 55%, rgba(5,8,19,0.92) 100%);
+}
+
+#particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 90px;
+}
+
+/* ================= Glass panel ================= */
+.panel {
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 40px 44px;
+  max-width: 640px;
+  width: 90%;
+  text-align: center;
+}
+
+.rama {
+  position: absolute;
+  top: -60px;
+  right: -30px;
+  width: 160px;
+  height: 130px;
+  pointer-events: none;
+}
+
+.rama svg { width: 100%; height: 100%; }
+
+/* ================= Eyebrow ================= */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber-soft);
+  margin-bottom: 14px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 10px var(--amber);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.75); }
+}
+
+/* ================= Title / tagline ================= */
+h1#title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.tagline {
+  font-family: 'Sora', sans-serif;
+  color: var(--ink-dim);
+  font-size: 1rem;
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+/* ================= Buttons ================= */
+.cta-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #1a1206;
+  border: 1px solid var(--amber);
+}
+
+.btn-primary:hover { transform: translateY(-2px); background: var(--amber-soft); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--glass-border);
+}
+
+.btn-ghost:hover { transform: translateY(-2px); border-color: var(--moon); }
+
+.btn-small { padding: 8px 18px; font-size: 0.85rem; margin-top: 4px; }
+
+/* ================= About ================= */
+.about {
+  padding: 120px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+
+.about-text {
+  max-width: none;
+  width: auto;
+  text-align: left;
+}
+
+.about-text h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--ink);
+  margin: 12px 0 16px;
+}
+
+.about-text p {
+  font-family: 'Sora', sans-serif;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.about-text strong {
+  color: var(--amber-soft);
+  font-weight: 500;
+}
+
+/* ================= Discord card ================= */
+.discord-card {
+  max-width: none;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.discord-avatar-wrap {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+
+.discord-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--amber);
+  background: var(--glass);
+}
+
+.discord-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid var(--bg-deep);
+  background: #747f8d;
+  transition: background 0.3s var(--ease);
+}
+
+.discord-status-dot.online { background: #3ba55d; }
+.discord-status-dot.idle { background: #faa61a; }
+.discord-status-dot.dnd { background: #ed4245; }
+.discord-status-dot.offline { background: #747f8d; }
+
+.discord-name {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.discord-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* ================= Music card (Spotify embed) ================= */
+.music-card {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 300px;
+  max-width: calc(100vw - 32px);
+  z-index: 50;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ================= Visit counter ================= */
+.visit-counter {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  z-index: 50;
+}
+
+.visit-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+}
+
+/* ================= Accessibility ================= */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-a, .hero-bg-b, .btn, .discord-status-dot { transition: none !important; }
+  .dot { animation: none !important; }
+}
+
+@media (pointer: coarse) {
+  #particles { display: none; }
+}
