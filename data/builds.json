@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title_es": "imagen 2",
+    "title_en": "Image 2",
+    "category": "medieval",
+    "image": "assets/images/escena-1.jpg",
+    "size": "large",
+    "coords": "X: 240 / Z: -1180",
+    "description_es": "descripcion de prueba 1",
+    "description_en": "Test description 1"
+  },
+  {
+    "id": 2,
+    "title_es": "imagen 1",
+    "title_en": "Image 1",
+    "category": "medieval",
+    "image": "assets/images/escena-2.jpg",
+    "size": "tall",
+    "coords": "X: 88 / Z: -940",
+    "description_es": "descripcion de prueba 2",
+    "description_en": "Test description 2"
+  }
+]

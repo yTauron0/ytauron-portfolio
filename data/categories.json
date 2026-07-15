@@ -1,0 +1,34 @@
+[
+  {
+    "id": "medieval",
+    "label_es": "Medieval",
+    "label_en": "Medieval",
+    "icon": "🏰",
+    "description_es": "Castillos, pueblos y fortalezas de estilo medieval.",
+    "description_en": "Castles, villages and medieval-style fortresses."
+  },
+  {
+    "id": "moderno",
+    "label_es": "Moderno",
+    "label_en": "Modern",
+    "icon": "🏙️",
+    "description_es": "Rascacielos y arquitectura contemporánea.",
+    "description_en": "Skyscrapers and contemporary architecture."
+  },
+  {
+    "id": "lobby",
+    "label_es": "Lobbies",
+    "label_en": "Lobbies",
+    "icon": "🎮",
+    "description_es": "Lobbies y hubs para servidores.",
+    "description_en": "Lobbies and hubs for servers."
+  },
+  {
+    "id": "interior",
+    "label_es": "Interiores",
+    "label_en": "Interiors",
+    "icon": "🛋️",
+    "description_es": "Diseño de interiores y ambientación.",
+    "description_en": "Interior design and atmosphere."
+  }
+]

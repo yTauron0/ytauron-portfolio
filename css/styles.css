@@ -335,3 +335,87 @@ h1#title {
 @media (pointer: coarse) {
   #particles { display: none; }
 }
+/* ================= Language toggle ================= */
+.lang-toggle {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--amber-soft);
+  cursor: pointer;
+  z-index: 60;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.lang-toggle:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+/* ================= Scroll suave ================= */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ================= Reveal on scroll ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Para que los hijos de un grupo aparezcan uno tras otro */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
+
+/* ================= Click feedback en botones ================= */
+.btn {
+  transition: transform 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.filter-btn {
+  transition: all 0.25s ease, transform 0.15s ease;
+}
+
+.filter-btn:active {
+  transform: scale(0.94);
+}
+
+/* ================= Respeta accesibilidad ================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

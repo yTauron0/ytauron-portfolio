@@ -128,3 +128,47 @@ fetch('https://ytauron-portfolio.goatcounter.com/counter/TOTAL.json')
     if (el) el.textContent = data.count;
   })
   .catch(err => console.error('No se pudo cargar el contador:', err));
+  // ---- Reveal on scroll (IntersectionObserver) ----
+(function revealOnScroll() {
+  const targets = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (!targets.length) return;
+
+  if (reduceMotion) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  targets.forEach(el => observer.observe(el));
+})();
+// ---- Spotify player con autoplay al primer clic del usuario ----
+let spotifyController = null;
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  const element = document.getElementById('musicCard');
+  const options = {
+    uri: 'spotify:playlist:6Xux2xcM7pATKcXVzvfLuI',
+    width: '100%',
+    height: '152'
+  };
+  IFrameAPI.createController(element, options, (controller) => {
+    spotifyController = controller;
+  });
+};
+
+function startMusicOnce() {
+  if (spotifyController) {
+    spotifyController.play();
+  }
+  document.removeEventListener('click', startMusicOnce);
+}
+
+document.addEventListener('click', startMusicOnce, { once: true });

@@ -1,0 +1,48 @@
+{
+  "es": {
+    "hero": {
+      "eyebrow": "disponible para encargos",
+      "tagline": "Builder desde 2021 — estructuras, lobbies y arenas PvP con estilo propio.",
+      "cta_portfolio": "Ver Portfolio",
+      "cta_contact": "Contacto"
+    },
+    "about": {
+      "eyebrow": "sobre mí",
+      "title": "Quién está detrás de las builds",
+      "text": "Mi nombre es Julián — builder profesional de Minecraft, radicado en Chile, trabajando bajo el nombre <strong>yTauron</strong> desde 2021. Me especializo en estructuras — desde lobbies y arenas Box PvP hasta proyectos más grandes y detallados. Trabajo con herramientas profesionales como <strong>Axiom</strong>, <strong>WorldEdit</strong>, <strong>Arceon</strong>, <strong>VoxelSniper</strong> y <strong>GoBrush</strong> para entregar resultados limpios y listos para encargos sin perder carácter ni detalle en el camino.",
+      "discord_label": "builder en discord",
+      "add_me": "Agregarme"
+    },
+    "portfolio": {
+      "eyebrow": "portfolio",
+      "title": "Builds recientes",
+      "subtitle": "Una selección de proyectos — filtrá por categoría.",
+      "filter_all": "Todos"
+    },
+    "visits": "visitas",
+    "lang_toggle": "EN"
+  },
+  "en": {
+    "hero": {
+      "eyebrow": "available for commissions",
+      "tagline": "Builder since 2021 — structures, lobbies, and PvP arenas with a signature style.",
+      "cta_portfolio": "View Portfolio",
+      "cta_contact": "Contact"
+    },
+    "about": {
+      "eyebrow": "about",
+      "title": "Who's behind the builds",
+      "text": "My name is Julián — professional Minecraft builder based in Chile, working under the name <strong>yTauron</strong> since 2021. I specialize in structures — from lobbies and Box PvP arenas to larger, detail-heavy projects. I work with professional tools like <strong>Axiom</strong>, <strong>WorldEdit</strong>, <strong>Arceon</strong>, <strong>VoxelSniper</strong>, and <strong>GoBrush</strong> to deliver clean, commission-ready results without losing character or detail along the way.",
+      "discord_label": "builder on discord",
+      "add_me": "Add me"
+    },
+    "portfolio": {
+      "eyebrow": "portfolio",
+      "title": "Recent builds",
+      "subtitle": "A selection of projects — filter by category.",
+      "filter_all": "All"
+    },
+    "visits": "visits",
+    "lang_toggle": "ES"
+  }
+}

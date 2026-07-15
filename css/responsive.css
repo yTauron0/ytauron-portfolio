@@ -1,0 +1,74 @@
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
+
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+  }
+  .bento-item.size-large { grid-column: span 2; grid-row: span 2; }
+  .bento-item.size-wide  { grid-column: span 2; grid-row: span 1; }
+  .bento-item.size-tall  { grid-column: span 1; grid-row: span 2; }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-content .panel {
+    padding: 24px 20px;
+    margin: 0 auto;
+    width: calc(100% - 32px);
+  }
+
+  #title {
+    font-size: clamp(1.8rem, 10vw, 2.6rem);
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .cta-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+  .bento-item.size-large,
+  .bento-item.size-wide,
+  .bento-item.size-tall,
+  .bento-item.size-normal {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .filter-bar {
+    gap: 8px;
+  }
+  .filter-btn {
+    font-size: 0.72rem;
+    padding: 6px 14px;
+  }
+
+  .music-card {
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+
+  .visit-counter {
+    font-size: 0.7rem;
+  }
+
+  .lightbox-content {
+    max-height: 85vh;
+  }
+  .lightbox-info h3 {
+    font-size: 1.2rem;
+  }
+}
