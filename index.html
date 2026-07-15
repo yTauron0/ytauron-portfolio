@@ -50,7 +50,7 @@
       <h1 id="title"></h1>
       <p class="tagline" data-i18n="hero.tagline">Builder since 2021 — structures, lobbies, and PvP arenas with a signature style.</p>
       <div class="cta-row">
-        <a href="#about" class="btn btn-primary" data-i18n="hero.cta_portfolio">View Portfolio</a>
+        <a href="#portfolio" class="btn btn-primary" data-i18n="hero.cta_portfolio">View Portfolio</a>
         <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="hero.cta_contact">Contact</a>
       </div>
     </div>
@@ -91,6 +91,8 @@
   <div class="bento-grid" id="bentoGrid"></div>
 </section>
 
+<div id="scrollSentinel"></div>
+
 <div class="lightbox" id="lightbox">
   <div class="lightbox-content">
     <img id="lightboxImg" src="" alt="">
@@ -103,7 +105,9 @@
   </div>
 </div>
 
-<div class="music-card" id="musicCard"></div>
+<div class="music-card" id="musicCardWrap">
+  <div id="musicCard"></div>
+</div>
 
 <div class="visit-counter" id="visitCounter">
   <span class="visit-dot"></span>

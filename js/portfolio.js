@@ -132,6 +132,46 @@ function closeLightbox() {
 document.addEventListener('DOMContentLoaded', async () => {
   await loadCategories();
   await loadBuilds();
+// ---- Tilt / efecto vidrio al mover el mouse sobre los builds ----
+(function bentoTilt() {
+  const grid = document.getElementById('bentoGrid');
+  if (!grid) return;
+
+  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isCoarse || reduceMotion) return; // no molestar en celular / si el usuario prefiere menos movimiento
+
+  const MAX_TILT = 8; // grados de inclinación máxima
+
+  grid.addEventListener('mousemove', (e) => {
+    const item = e.target.closest('.bento-item');
+    if (!item) return;
+
+    const rect = item.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const px = (x / rect.width) * 100;
+    const py = (y / rect.height) * 100;
+
+    const rotateY = ((x / rect.width) - 0.5) * MAX_TILT * 2;
+    const rotateX = ((y / rect.height) - 0.5) * -MAX_TILT * 2;
+
+    item.style.setProperty('--mx', `${px}%`);
+    item.style.setProperty('--my', `${py}%`);
+    item.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    item.classList.add('tilting');
+  });
+
+  grid.addEventListener('mouseout', (e) => {
+    const item = e.target.closest('.bento-item');
+    if (!item) return;
+    if (item.contains(e.relatedTarget)) return; // sigue dentro del mismo item, no resetear
+
+    item.style.transform = 'translateY(0)';
+    item.classList.remove('tilting');
+  });
+})();
 
   document.getElementById('lightboxCloseBtn').addEventListener('click', closeLightbox);
   document.getElementById('lightbox').addEventListener('click', (e) => {

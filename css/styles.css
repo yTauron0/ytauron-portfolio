@@ -88,6 +88,8 @@ a { text-decoration: none; color: inherit; }
   max-width: 640px;
   width: 90%;
   text-align: center;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
 }
 
 .rama {
@@ -297,6 +299,49 @@ h1#title {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  background: #14141c;
+  transition: all 0.6s var(--ease);
+}
+
+.music-card.expanded {
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: 0 -6px 24px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+}
+
+.music-card.expanded #musicCard {
+  flex: 1;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(0,0,0,0.25);
+}
+
+.music-card.expanded .volume-control {
+  padding: 8px 20px;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.volume-icon {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.volume-control input[type="range"] {
+  flex: 1;
+  accent-color: var(--amber);
+  cursor: pointer;
 }
 
 /* ================= Visit counter ================= */
@@ -418,4 +463,16 @@ html {
     transform: none !important;
     transition: none !important;
   }
+}
+#scrollSentinel {
+  height: 1px;
+  width: 100%;
+}
+:root {
+  --player-height: 190px; /* valor de respaldo hasta que el JS calcule el real */
+}
+
+.portfolio-section {
+  padding-bottom: calc(var(--player-height) + 40px);
+  transition: padding-bottom 0.6s var(--ease);
 }

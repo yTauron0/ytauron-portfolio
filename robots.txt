@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://ytauron0.github.io/ytauron-portfolio/sitemap.xml

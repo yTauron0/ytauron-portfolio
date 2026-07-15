@@ -149,8 +149,10 @@ fetch('https://ytauron-portfolio.goatcounter.com/counter/TOTAL.json')
 
   targets.forEach(el => observer.observe(el));
 })();
-// ---- Spotify player con autoplay al primer clic del usuario ----
+// ---- Spotify player: autoplay al primer clic + expandir al final de la página ----
 let spotifyController = null;
+let userWantsMusic = false;
+let musicStarted = false;
 
 window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const element = document.getElementById('musicCard');
@@ -161,14 +163,37 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   };
   IFrameAPI.createController(element, options, (controller) => {
     spotifyController = controller;
+    // Si el usuario ya había hecho clic antes de que esto terminara de cargar, arrancamos ahora
+    if (userWantsMusic && !musicStarted) {
+      controller.play();
+      musicStarted = true;
+    }
   });
 };
 
 function startMusicOnce() {
-  if (spotifyController) {
+  userWantsMusic = true;
+  if (spotifyController && !musicStarted) {
     spotifyController.play();
+    musicStarted = true;
   }
   document.removeEventListener('click', startMusicOnce);
 }
 
 document.addEventListener('click', startMusicOnce, { once: true });
+
+
+// ---- Expandir el reproductor al llegar al final de la página ----
+(function expandPlayerAtBottom() {
+  const sentinel = document.getElementById('scrollSentinel');
+  const wrap = document.getElementById('musicCardWrap');
+  if (!sentinel || !wrap) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      wrap.classList.toggle('expanded', entry.isIntersecting);
+    });
+  }, { threshold: 0 });
+
+  observer.observe(sentinel);
+})();

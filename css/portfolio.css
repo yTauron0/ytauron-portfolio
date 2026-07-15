@@ -3,7 +3,9 @@
    ================================================== */
 
 .portfolio-section {
-  padding: 100px 24px;
+  padding-top: 100px;
+  padding-left: 24px;
+  padding-right: 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -74,6 +76,37 @@
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s ease;
+}
+
+/* ================= Tilt / efecto vidrio ================= */
+.bento-item {
+  --mx: 50%;
+  --my: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.bento-item.tilting {
+  transition: transform 0.1s ease-out, border-color 0.25s ease;
+}
+
+.bento-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, 0.28), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bento-item.tilting::after {
+  opacity: 1;
+}
+
+.bento-item .item-overlay {
+  z-index: 3;
 }
 
 .bento-item.visible {
