@@ -9,6 +9,7 @@
   --glass: rgba(20, 26, 46, 0.55);
   --glass-border: rgba(190, 200, 230, 0.14);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --player-height: 190px;
 }
 
 * { box-sizing: border-box; }
@@ -185,6 +186,8 @@ h1#title {
 
 .btn-small { padding: 8px 18px; font-size: 0.85rem; margin-top: 4px; }
 
+.btn:active { transform: scale(0.96); }
+
 /* ================= About ================= */
 .about {
   padding: 120px 24px;
@@ -229,33 +232,7 @@ h1#title {
   font-weight: 500;
 }
 
-/* ================= Discord card ================= */
-.discord-card {
-  max-width: none;
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 10px;
-}
-
-.discord-avatar-wrap {
-  position: relative;
-  width: 84px;
-  height: 84px;
-}
-
-.discord-avatar {
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--amber);
-  background: var(--glass);
-}
-
+/* ================= Discord status dot (base, reusado) ================= */
 .discord-status-dot {
   position: absolute;
   bottom: 2px;
@@ -272,21 +249,6 @@ h1#title {
 .discord-status-dot.idle { background: #faa61a; }
 .discord-status-dot.dnd { background: #ed4245; }
 .discord-status-dot.offline { background: #747f8d; }
-
-.discord-name {
-  font-family: 'Sora', sans-serif;
-  font-weight: 600;
-  color: var(--ink);
-  font-size: 1.05rem;
-}
-
-.discord-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
 
 /* ================= Music card (Spotify embed) ================= */
 .music-card {
@@ -317,31 +279,6 @@ h1#title {
 
 .music-card.expanded #musicCard {
   flex: 1;
-}
-
-.volume-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: rgba(0,0,0,0.25);
-}
-
-.music-card.expanded .volume-control {
-  padding: 8px 20px;
-  width: 180px;
-  flex-shrink: 0;
-}
-
-.volume-icon {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-.volume-control input[type="range"] {
-  flex: 1;
-  accent-color: var(--amber);
-  cursor: pointer;
 }
 
 /* ================= Visit counter ================= */
@@ -380,6 +317,7 @@ h1#title {
 @media (pointer: coarse) {
   #particles { display: none; }
 }
+
 /* ================= Language toggle ================= */
 .lang-toggle {
   position: fixed;
@@ -404,6 +342,7 @@ h1#title {
   border-color: var(--amber);
   color: var(--amber);
 }
+
 /* ================= Scroll suave ================= */
 html {
   scroll-behavior: smooth;
@@ -421,7 +360,6 @@ html {
   transform: translateY(0);
 }
 
-/* Para que los hijos de un grupo aparezcan uno tras otro */
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(20px);
@@ -438,15 +376,6 @@ html {
 .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
 .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
 
-/* ================= Click feedback en botones ================= */
-.btn {
-  transition: transform 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease);
-}
-
-.btn:active {
-  transform: scale(0.96);
-}
-
 .filter-btn {
   transition: all 0.25s ease, transform 0.15s ease;
 }
@@ -455,7 +384,6 @@ html {
   transform: scale(0.94);
 }
 
-/* ================= Respeta accesibilidad ================= */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal, .reveal-stagger > * {
@@ -464,15 +392,176 @@ html {
     transition: none !important;
   }
 }
+
+/* ================= Scroll sentinel + espacio para el reproductor ================= */
 #scrollSentinel {
   height: 1px;
   width: 100%;
-}
-:root {
-  --player-height: 190px; /* valor de respaldo hasta que el JS calcule el real */
 }
 
 .portfolio-section {
   padding-bottom: calc(var(--player-height) + 40px);
   transition: padding-bottom 0.6s var(--ease);
+}
+
+/* ================= Brillos alrededor del avatar de Discord ================= */
+.sparkle {
+  position: absolute;
+  color: var(--amber-soft);
+  font-size: 0.8rem;
+  pointer-events: none;
+  text-shadow: 0 0 8px var(--amber);
+  animation: sparkle-twinkle 2.4s ease-in-out infinite;
+}
+
+.sparkle-1 { top: -6px;   left: -10px; animation-delay: 0s; }
+.sparkle-2 { top: 10%;    right: -14px; animation-delay: 0.6s; font-size: 0.6rem; }
+.sparkle-3 { bottom: -4px; left: 15%;  animation-delay: 1.2s; font-size: 0.65rem; }
+.sparkle-4 { top: 55%;    left: -16px; animation-delay: 1.8s; font-size: 0.5rem; }
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(15deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkle { animation: none !important; opacity: 0.6; }
+}
+
+/* ================= Tarjetita de usuario/actividad de Discord ================= */
+.discord-subcard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 8px 14px 8px 8px;
+  max-width: fit-content;
+  margin: 0 auto;
+}
+
+.discord-subcard-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--glass-border);
+}
+
+.discord-subcard-info {
+  text-align: left;
+}
+
+.discord-subcard-username {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+
+.discord-subcard-activity {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ================= Avatar de Discord (foto redonda, reusado) ================= */
+.discord-bubble-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--amber);
+  background: var(--glass);
+  box-shadow: 0 0 24px rgba(255, 176, 87, 0.35);
+  display: block;
+}
+
+/* ================= Anclas invisibles (marcan posiciones para la animación) ================= */
+.discord-anchor {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 168px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.discord-card-slot {
+  width: 100%;
+  min-height: 220px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ================= Tarjeta flotante de Discord (consolidada, se anima con el scroll) ================= */
+.discord-floating-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  z-index: 40;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform, top, left;
+}
+
+.discord-floating-avatar-wrap {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  overflow: visible;
+}
+
+.discord-floating-avatar-wrap .discord-status-dot {
+  position: absolute;
+}
+
+.discord-floating-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.discord-bubble-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-dim);
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.discord-floating-addme {
+  opacity: 0;
+  margin-top: 4px;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discord-floating-card { transition: none; }
+}
+
+@media (max-width: 760px) {
+  .discord-floating-card { width: 170px; }
+  .discord-subcard-activity { max-width: 110px; }
 }

@@ -4,7 +4,7 @@
 
 let allBuilds = [];
 let allCategories = [];
-let activeCategory = 'all';
+let activeCategory = 'featured';
 
 function lang() {
   return typeof currentLang !== 'undefined' ? currentLang : 'es';
@@ -27,13 +27,13 @@ function renderFilterBar() {
   bar.innerHTML = '';
 
   const l = lang();
-  const allLabel = (typeof getText === 'function') ? getText('portfolio.filter_all') : 'Todos';
+  const featuredLabel = (typeof getText === 'function') ? getText('portfolio.filter_featured') : 'Destacados';
 
-  const allBtn = document.createElement('button');
-  allBtn.className = 'filter-btn' + (activeCategory === 'all' ? ' active' : '');
-  allBtn.dataset.filter = 'all';
-  allBtn.textContent = allLabel;
-  bar.appendChild(allBtn);
+  const featuredBtn = document.createElement('button');
+  featuredBtn.className = 'filter-btn' + (activeCategory === 'featured' ? ' active' : '');
+  featuredBtn.dataset.filter = 'featured';
+  featuredBtn.textContent = featuredLabel;
+  bar.appendChild(featuredBtn);
 
   allCategories.forEach(cat => {
     const label = cat['label_' + l] || cat.label || cat.id;
@@ -77,6 +77,7 @@ function renderGrid() {
     const item = document.createElement('div');
     item.className = `bento-item size-${build.size}`;
     item.dataset.category = build.category;
+    item.dataset.featured = build.featured ? 'true' : 'false';
     item.innerHTML = `
       <img src="${build.image}" alt="${title}" loading="lazy">
       <div class="item-overlay">
@@ -96,7 +97,9 @@ function renderGrid() {
 function applyFilter() {
   const items = document.querySelectorAll('.bento-item');
   items.forEach(item => {
-    const matches = activeCategory === 'all' || item.dataset.category === activeCategory;
+    const matches = activeCategory === 'featured'
+      ? item.dataset.featured === 'true'
+      : item.dataset.category === activeCategory;
     item.classList.toggle('hidden-by-filter', !matches);
   });
 }
@@ -118,7 +121,16 @@ function openLightbox(build, catLabel, title, desc) {
   document.getElementById('lightboxImg').src = build.image;
   document.getElementById('lightboxImg').alt = title;
   document.getElementById('lightboxTitle').textContent = title;
-  document.getElementById('lightboxCoords').textContent = build.coords;
+
+  const coordsEl = document.getElementById('lightboxCoords');
+  if (build.coords && build.coords.trim() !== '') {
+    coordsEl.textContent = build.coords;
+    coordsEl.style.display = '';
+  } else {
+    coordsEl.textContent = '';
+    coordsEl.style.display = 'none';
+  }
+
   document.getElementById('lightboxDesc').textContent = desc;
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';

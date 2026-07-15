@@ -33,6 +33,8 @@
   <div class="hero-overlay"></div>
   <canvas id="particles"></canvas>
 
+  <div class="discord-anchor" id="discordAnchorHero" aria-hidden="true"></div>
+
   <div class="hero-content">
     <div class="panel">
       <div class="rama">
@@ -47,7 +49,7 @@
       </div>
 
       <div class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">available for commissions</span></div>
-      <h1 id="title"></h1>
+      <h1 id="title">yTauron</h1>
       <p class="tagline" data-i18n="hero.tagline">Builder since 2021 — structures, lobbies, and PvP arenas with a signature style.</p>
       <div class="cta-row">
         <a href="#portfolio" class="btn btn-primary" data-i18n="hero.cta_portfolio">View Portfolio</a>
@@ -66,15 +68,7 @@
       <p data-i18n-html="about.text"></p>
     </div>
 
-    <div class="panel discord-card">
-      <div class="discord-avatar-wrap">
-        <img id="discordAvatar" class="discord-avatar" src="" alt="Discord avatar">
-        <span id="discordStatusDot" class="discord-status-dot"></span>
-      </div>
-      <div class="discord-name" id="discordName">Loading...</div>
-      <div class="discord-label" data-i18n="about.discord_label">builder on Discord</div>
-      <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost btn-small" data-i18n="about.add_me">Add me</a>
-    </div>
+    <div class="discord-card-slot" id="discordAnchorAbout" aria-hidden="true"></div>
 
   </div>
 </section>
@@ -115,6 +109,29 @@
 </div>
 
 <button class="lang-toggle" id="langToggle">EN</button>
+
+<div class="discord-floating-card" id="discordFloatingCard">
+  <div class="discord-floating-avatar-wrap">
+    <img id="discordBubbleAvatar" class="discord-bubble-avatar" src="" alt="Avatar de Discord">
+    <span id="discordBubbleStatusDot" class="discord-status-dot"></span>
+    <span class="sparkle sparkle-1">✦</span>
+    <span class="sparkle sparkle-2">✦</span>
+    <span class="sparkle sparkle-3">✦</span>
+    <span class="sparkle sparkle-4">✦</span>
+  </div>
+  <div class="discord-floating-name" id="discordBubbleName">yTauron</div>
+  <div class="discord-bubble-status" id="discordBubbleStatus">Cargando estado...</div>
+
+  <div class="discord-subcard" id="discordSubcard">
+    <img id="discordSubcardAvatar" class="discord-subcard-avatar" src="" alt="">
+    <div class="discord-subcard-info">
+      <div class="discord-subcard-username" id="discordSubcardUsername">@usuario</div>
+      <div class="discord-subcard-activity" id="discordSubcardActivity">cargando...</div>
+    </div>
+  </div>
+
+  <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost btn-small discord-floating-addme" id="discordAddMeBtn" data-i18n="about.add_me">Add me</a>
+</div>
 
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 <script src="js/i18n.js" defer></script>

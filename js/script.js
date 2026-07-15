@@ -8,25 +8,41 @@ const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 // ---- Title letter-by-letter animation ----
 (function animateTitle() {
   const el = document.getElementById('title');
+  if (!el) return;
   const text = 'yTauron';
-  el.textContent = '';
-  text.split('').forEach((ch, i) => {
-    const span = document.createElement('span');
-    span.textContent = ch;
-    span.style.opacity = reduceMotion ? '1' : '0';
-    span.style.display = 'inline-block';
-    span.style.transition = `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s`;
-    span.style.transform = reduceMotion ? 'none' : 'translateY(10px)';
-    el.appendChild(span);
-  });
-  requestAnimationFrame(() => {
+
+  try {
+    el.textContent = '';
+    text.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.textContent = ch;
+      span.style.opacity = reduceMotion ? '1' : '0';
+      span.style.display = 'inline-block';
+      span.style.transition = `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s`;
+      span.style.transform = reduceMotion ? 'none' : 'translateY(10px)';
+      el.appendChild(span);
+    });
+
     requestAnimationFrame(() => {
-      [...el.children].forEach(span => {
-        span.style.opacity = '1';
-        span.style.transform = 'translateY(0)';
+      requestAnimationFrame(() => {
+        [...el.children].forEach(span => {
+          span.style.opacity = '1';
+          span.style.transform = 'translateY(0)';
+        });
       });
     });
-  });
+
+    setTimeout(() => {
+      const stillHidden = [...el.children].some(span => span.style.opacity !== '1');
+      if (stillHidden) {
+        el.textContent = text;
+      }
+    }, 1500);
+
+  } catch (err) {
+    console.error('Fallo la animación del título, mostrando texto plano:', err);
+    el.textContent = text;
+  }
 })();
 
 // ---- Hero background crossfade every 20s ----
@@ -92,6 +108,25 @@ const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 // ---- Discord live profile (Lanyard) ----
 const DISCORD_USER_ID = '847591632890363954';
 
+function getDiscordStatusLabel(data) {
+  const custom = (data.activities || []).find(a => a.type === 4);
+  if (custom && custom.state) return custom.state;
+  const labels = { online: 'En línea', idle: 'Ausente', dnd: 'No molestar', offline: 'Desconectado' };
+  return labels[data.discord_status] || 'Desconectado';
+}
+
+function getDiscordActivityLabel(data) {
+  if (data.listening_to_spotify && data.spotify) {
+    return `🎵 ${data.spotify.song} — ${data.spotify.artist}`;
+  }
+  const playing = (data.activities || []).find(a => a.type === 0);
+  if (playing && playing.name) {
+    return `🎮 Jugando a ${playing.name}`;
+  }
+  const labels = { online: 'En línea', idle: 'Ausente', dnd: 'No molestar', offline: 'Desconectado' };
+  return labels[data.discord_status] || 'Desconectado';
+}
+
 async function updateDiscordCard() {
   try {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
@@ -104,14 +139,25 @@ async function updateDiscordCard() {
     const avatarUrl = user.avatar
       ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${avatarExt}?size=128`
       : `https://cdn.discordapp.com/embed/avatars/0.png`;
+    const statusClass = 'discord-status-dot ' + (data.discord_status || 'offline');
+    const statusLabel = getDiscordStatusLabel(data);
 
-    const avatarEl = document.getElementById('discordAvatar');
-    const nameEl = document.getElementById('discordName');
-    const dotEl = document.getElementById('discordStatusDot');
+    const bubbleAvatarEl = document.getElementById('discordBubbleAvatar');
+    const bubbleDotEl = document.getElementById('discordBubbleStatusDot');
+    const bubbleNameEl = document.getElementById('discordBubbleName');
+    const statusTextEl = document.getElementById('discordBubbleStatus');
+    if (bubbleAvatarEl) bubbleAvatarEl.src = avatarUrl;
+    if (bubbleDotEl) bubbleDotEl.className = statusClass;
+    if (bubbleNameEl) bubbleNameEl.textContent = user.global_name || user.username;
+    if (statusTextEl) statusTextEl.textContent = statusLabel;
 
-    if (avatarEl) avatarEl.src = avatarUrl;
-    if (nameEl) nameEl.textContent = user.global_name || user.username;
-    if (dotEl) dotEl.className = 'discord-status-dot ' + (data.discord_status || 'offline');
+    const subAvatarEl = document.getElementById('discordSubcardAvatar');
+    const subUserEl = document.getElementById('discordSubcardUsername');
+    const subActivityEl = document.getElementById('discordSubcardActivity');
+    if (subAvatarEl) subAvatarEl.src = avatarUrl;
+    if (subUserEl) subUserEl.textContent = '@' + user.username;
+    if (subActivityEl) subActivityEl.textContent = getDiscordActivityLabel(data);
+
   } catch (err) {
     console.error('No se pudo cargar el perfil de Discord:', err);
   }
@@ -128,7 +174,8 @@ fetch('https://ytauron-portfolio.goatcounter.com/counter/TOTAL.json')
     if (el) el.textContent = data.count;
   })
   .catch(err => console.error('No se pudo cargar el contador:', err));
-  // ---- Reveal on scroll (IntersectionObserver) ----
+
+// ---- Reveal on scroll (IntersectionObserver) ----
 (function revealOnScroll() {
   const targets = document.querySelectorAll('.reveal, .reveal-stagger');
   if (!targets.length) return;
@@ -149,7 +196,8 @@ fetch('https://ytauron-portfolio.goatcounter.com/counter/TOTAL.json')
 
   targets.forEach(el => observer.observe(el));
 })();
-// ---- Spotify player: autoplay al primer clic + expandir al final de la página ----
+
+// ---- Spotify player: autoplay al primer clic ----
 let spotifyController = null;
 let userWantsMusic = false;
 let musicStarted = false;
@@ -163,7 +211,6 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   };
   IFrameAPI.createController(element, options, (controller) => {
     spotifyController = controller;
-    // Si el usuario ya había hecho clic antes de que esto terminara de cargar, arrancamos ahora
     if (userWantsMusic && !musicStarted) {
       controller.play();
       musicStarted = true;
@@ -182,18 +229,100 @@ function startMusicOnce() {
 
 document.addEventListener('click', startMusicOnce, { once: true });
 
-
 // ---- Expandir el reproductor al llegar al final de la página ----
 (function expandPlayerAtBottom() {
   const sentinel = document.getElementById('scrollSentinel');
   const wrap = document.getElementById('musicCardWrap');
   if (!sentinel || !wrap) return;
 
+  function updatePlayerHeightVar() {
+    const h = wrap.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--player-height', `${Math.ceil(h)}px`);
+  }
+
+  const resizeObserver = new ResizeObserver(updatePlayerHeightVar);
+  resizeObserver.observe(wrap);
+  updatePlayerHeightVar();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       wrap.classList.toggle('expanded', entry.isIntersecting);
+      setTimeout(updatePlayerHeightVar, 650);
     });
   }, { threshold: 0 });
 
   observer.observe(sentinel);
+})();
+
+// ---- Tarjeta de Discord: viaja del hero al "Add me", se compacta a mitad de camino ----
+(function discordFloatingCard() {
+  const card = document.getElementById('discordFloatingCard');
+  const anchorHero = document.getElementById('discordAnchorHero');
+  const anchorAbout = document.getElementById('discordAnchorAbout');
+  const aboutSection = document.getElementById('about');
+  const nameEl = document.getElementById('discordBubbleName');
+  const statusEl = document.getElementById('discordBubbleStatus');
+  const subcard = document.getElementById('discordSubcard');
+  const addMeBtn = document.getElementById('discordAddMeBtn');
+
+  if (!card || !anchorHero || !anchorAbout || !aboutSection) return;
+
+  if (reduceMotion) {
+    const r = anchorHero.getBoundingClientRect();
+    card.style.position = 'absolute';
+    card.style.left = `${r.left + r.width / 2 + window.scrollX}px`;
+    card.style.top = `${r.top + r.height / 2 + window.scrollY}px`;
+    return;
+  }
+
+  function update() {
+    const heroRect = anchorHero.getBoundingClientRect();
+    const aboutAnchorRect = anchorAbout.getBoundingClientRect();
+    const aboutSectionRect = aboutSection.getBoundingClientRect();
+
+    const startTrigger = window.innerHeight;
+    const endTrigger = window.innerHeight * 0.35;
+    let progress = (startTrigger - aboutSectionRect.top) / (startTrigger - endTrigger);
+    progress = Math.max(0, Math.min(1, progress));
+
+    const startX = heroRect.left + heroRect.width / 2;
+    const startY = heroRect.top + heroRect.height / 2;
+    const endX = aboutAnchorRect.left + aboutAnchorRect.width / 2;
+    const endY = aboutAnchorRect.top + aboutAnchorRect.height / 2;
+
+    const x = startX + (endX - startX) * progress;
+    const y = startY + (endY - startY) * progress;
+
+    const bell = Math.sin(progress * Math.PI);
+    const minScale = 0.34;
+    const scale = 1 - bell * (1 - minScale);
+
+    card.style.left = `${x}px`;
+    card.style.top = `${y}px`;
+    card.style.transform = `translate(-50%, -50%) scale(${scale})`;
+
+    const contentOpacity = Math.max(0, 1 - bell * 1.6);
+    if (nameEl) nameEl.style.opacity = contentOpacity;
+    if (statusEl) statusEl.style.opacity = contentOpacity;
+    if (subcard) subcard.style.opacity = contentOpacity;
+
+    const addMeOpacity = progress > 0.82 ? Math.min(1, (progress - 0.82) / 0.18) : 0;
+    if (addMeBtn) {
+      addMeBtn.style.opacity = addMeOpacity;
+      addMeBtn.style.pointerEvents = addMeOpacity > 0.5 ? 'auto' : 'none';
+    }
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => { update(); ticking = false; });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('load', update);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();

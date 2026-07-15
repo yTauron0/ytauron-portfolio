@@ -3,7 +3,7 @@
     "hero": {
       "eyebrow": "disponible para encargos",
       "tagline": "Builder desde 2021 — estructuras, lobbies y arenas PvP con estilo propio.",
-      "cta_portfolio": "Ver Portfolio",
+      "cta_portfolio": "Ver Portfalio",
       "cta_contact": "Contacto"
     },
     "about": {
@@ -17,7 +17,9 @@
       "eyebrow": "portfolio",
       "title": "Builds recientes",
       "subtitle": "Una selección de proyectos — filtrá por categoría.",
-      "filter_all": "Todos"
+      "filter_all": "Todos",
+      "filter_all": "Todos",
+      "filter_featured": "Destacados"
     },
     "visits": "visitas",
     "lang_toggle": "EN"
@@ -40,7 +42,9 @@
       "eyebrow": "portfolio",
       "title": "Recent builds",
       "subtitle": "A selection of projects — filter by category.",
-      "filter_all": "All"
+      "filter_all": "All",
+      "filter_all": "All",
+      "filter_featured": "Featured"
     },
     "visits": "visits",
     "lang_toggle": "ES"
