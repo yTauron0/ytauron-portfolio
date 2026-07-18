@@ -4,6 +4,50 @@
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+// ---- Intro tipo telón con saludo bilingüe ----
+(function curtainIntro() {
+  const intro = document.getElementById('curtainIntro');
+  if (!intro) return;
+
+  if (reduceMotion) {
+    intro.remove();
+    return;
+  }
+
+  document.body.classList.add('curtain-active');
+
+  const es = intro.querySelector('.greeting-es');
+  const en = intro.querySelector('.greeting-en');
+
+  function run() {
+    // 1. Aparece el saludo en español
+    es.classList.add('show');
+
+    // 2. A los 1100ms, se va el español y entra el inglés
+    setTimeout(() => {
+      es.classList.remove('show');
+      es.classList.add('hide');
+      en.classList.add('show');
+    }, 1100);
+
+    // 3. A los 2200ms, se abre el telón
+    setTimeout(() => {
+      intro.classList.add('opening');
+      document.body.classList.remove('curtain-active');
+    }, 2200);
+
+    // 4. Se saca del DOM cuando termina la transición (1s de la animación del telón)
+    setTimeout(() => {
+      intro.remove();
+    }, 3300);
+  }
+
+  if (document.readyState === 'complete') {
+    run();
+  } else {
+    window.addEventListener('load', run);
+  }
+})();
 
 // ---- Title letter-by-letter animation ----
 (function animateTitle() {
