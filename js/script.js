@@ -45,17 +45,30 @@ const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
   }
 })();
 
-// ---- Hero background crossfade every 20s ----
-(function heroCrossfade() {
+// ---- Ciclo de tema + fondo del hero (cada 20s) ----
+(function themeAndBackgroundCycle() {
   const bgA = document.querySelector('.hero-bg-a');
   const bgB = document.querySelector('.hero-bg-b');
   if (!bgA || !bgB || reduceMotion) return;
 
-  let showingA = true;
+  const themes = ['city', 'moon', 'sepia'];
+  let step = 0;
+
+  function applyStep(i) {
+    const theme = themes[i];
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // "moon" usa el fondo de la luna; los otros dos reutilizan el de la ciudad
+    const showA = theme !== 'moon';
+    bgA.style.opacity = showA ? '1' : '0';
+    bgB.style.opacity = showA ? '0' : '1';
+  }
+
+  applyStep(step);
+
   setInterval(() => {
-    showingA = !showingA;
-    bgA.style.opacity = showingA ? '1' : '0';
-    bgB.style.opacity = showingA ? '0' : '1';
+    step = (step + 1) % themes.length;
+    applyStep(step);
   }, 20000);
 })();
 
@@ -266,6 +279,14 @@ document.addEventListener('click', startMusicOnce, { once: true });
   const addMeBtn = document.getElementById('discordAddMeBtn');
 
   if (!card || !anchorHero || !anchorAbout || !aboutSection) return;
+  if (!card || !anchorHero || !anchorAbout || !aboutSection) return;
+
+  function updateAnchorHeight() {
+    document.documentElement.style.setProperty('--discord-anchor-height', `${card.offsetHeight}px`);
+  }
+  const cardResizeObserver = new ResizeObserver(updateAnchorHeight);
+  cardResizeObserver.observe(card);
+  updateAnchorHeight();
 
   if (reduceMotion) {
     const r = anchorHero.getBoundingClientRect();
@@ -325,4 +346,15 @@ document.addEventListener('click', startMusicOnce, { once: true });
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', update);
   update();
+})();
+// ---- Acordeón de términos y condiciones ----
+(function termsAccordion() {
+  const btn = document.getElementById('termsToggleBtn');
+  const wrap = document.getElementById('termsContentWrap');
+  if (!btn || !wrap) return;
+
+  btn.addEventListener('click', () => {
+    const isOpen = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
 })();

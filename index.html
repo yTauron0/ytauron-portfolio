@@ -33,9 +33,8 @@
   <div class="hero-overlay"></div>
   <canvas id="particles"></canvas>
 
-  <div class="discord-anchor" id="discordAnchorHero" aria-hidden="true"></div>
-
   <div class="hero-content">
+    <div class="discord-anchor" id="discordAnchorHero" aria-hidden="true"></div>
     <div class="panel">
       <div class="rama">
         <svg viewBox="0 0 220 170" fill="none">
@@ -73,6 +72,52 @@
   </div>
 </section>
 
+<section class="contact-terms" id="contact">
+  <div class="contact-terms-header reveal">
+    <span class="eyebrow"><span class="dot"></span><span data-i18n="contact.eyebrow">contact</span></span>
+    <h2 data-i18n="contact.title">Cómo trabajamos</h2>
+    <p data-i18n="contact.subtitle">Antes de escribirme, esto es lo que necesitás saber.</p>
+  </div>
+
+  <div class="contact-terms-grid reveal-stagger">
+    <div class="panel contact-info-card">
+      <div class="contact-info-item">
+        <span class="contact-info-label" data-i18n="contact.response_time_label">Tiempo de respuesta</span>
+        <span class="contact-info-value" data-i18n="contact.response_time_value">12–24 horas</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label" data-i18n="contact.availability_label">Disponibilidad</span>
+        <span class="contact-info-value" data-i18n="contact.availability_value">Lunes a viernes</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label" data-i18n="contact.method_label">Medio de contacto</span>
+        <span class="contact-info-value" data-i18n="contact.method_value">Discord (único medio de contacto)</span>
+      </div>
+      <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="hero.cta_contact">Contact</a>
+    </div>
+
+    <div class="panel terms-card">
+      <button class="terms-toggle" id="termsToggleBtn" aria-expanded="false" aria-controls="termsContentWrap">
+        <span data-i18n="contact.terms_toggle">Ver términos y condiciones</span>
+        <span class="terms-toggle-icon">＋</span>
+      </button>
+      <div class="terms-content-wrap" id="termsContentWrap">
+        <div class="terms-content" id="termsContent">
+          <ul>
+            <li data-i18n="contact.terms_deposit"></li>
+            <li data-i18n="contact.terms_cancellation"></li>
+            <li data-i18n="contact.terms_revisions"></li>
+            <li data-i18n="contact.terms_delivery"></li>
+            <li data-i18n="contact.terms_payment"></li>
+            <li data-i18n="contact.terms_restrictions"></li>
+            <li data-i18n="contact.terms_ownership"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="portfolio-section" id="portfolio">
   <div class="portfolio-header reveal">
     <span class="eyebrow"><span class="dot"></span><span data-i18n="portfolio.eyebrow">portfolio</span></span>
@@ -88,8 +133,11 @@
 <div id="scrollSentinel"></div>
 
 <div class="lightbox" id="lightbox">
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrevBtn" aria-label="Anterior">‹</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNextBtn" aria-label="Siguiente">›</button>
   <div class="lightbox-content">
     <img id="lightboxImg" src="" alt="">
+    <span class="lightbox-watermark">yTauron</span>
     <div class="lightbox-info">
       <h3 id="lightboxTitle"></h3>
       <div class="coords" id="lightboxCoords"></div>

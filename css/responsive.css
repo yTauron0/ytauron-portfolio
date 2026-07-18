@@ -72,3 +72,28 @@
     font-size: 1.2rem;
   }
 }
+.bento-item::before {
+  content: 'yTauron';
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.lightbox-watermark {
+  position: absolute;
+  bottom: 14px;
+  right: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  pointer-events: none;
+  z-index: 5;
+}

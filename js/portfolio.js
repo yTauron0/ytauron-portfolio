@@ -61,6 +61,16 @@ async function loadBuilds() {
   }
 }
 
+function getVisibleBuilds() {
+  return allBuilds.filter(b => {
+    if (activeCategory === 'featured') return !!b.featured;
+    return b.category === activeCategory;
+  });
+}
+
+let currentVisibleBuilds = [];
+let currentLightboxIndex = -1;
+
 function renderGrid() {
   const grid = document.getElementById('bentoGrid');
   if (!grid) return;
@@ -85,7 +95,7 @@ function renderGrid() {
         <div class="item-title">${title}</div>
       </div>
     `;
-    item.addEventListener('click', () => openLightbox(build, catLabel, title, desc));
+    item.addEventListener('click', () => openLightbox(build));
     grid.appendChild(item);
 
     setTimeout(() => item.classList.add('visible'), index * 60);
@@ -116,8 +126,11 @@ function setupFilters() {
   });
 }
 
-function openLightbox(build, catLabel, title, desc) {
-  const lightbox = document.getElementById('lightbox');
+function displayInLightbox(build) {
+  const l = lang();
+  const title = build['title_' + l] || build.title;
+  const desc = build['description_' + l] || build.description;
+
   document.getElementById('lightboxImg').src = build.image;
   document.getElementById('lightboxImg').alt = title;
   document.getElementById('lightboxTitle').textContent = title;
@@ -132,8 +145,27 @@ function openLightbox(build, catLabel, title, desc) {
   }
 
   document.getElementById('lightboxDesc').textContent = desc;
-  lightbox.classList.add('open');
+
+  const showNav = currentVisibleBuilds.length > 1;
+  const prevBtn = document.getElementById('lightboxPrevBtn');
+  const nextBtn = document.getElementById('lightboxNextBtn');
+  if (prevBtn) prevBtn.style.display = showNav ? 'flex' : 'none';
+  if (nextBtn) nextBtn.style.display = showNav ? 'flex' : 'none';
+}
+
+function openLightbox(build) {
+  currentVisibleBuilds = getVisibleBuilds();
+  currentLightboxIndex = currentVisibleBuilds.findIndex(b => b.id === build.id);
+  displayInLightbox(build);
+
+  document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function navigateLightbox(direction) {
+  if (currentVisibleBuilds.length < 2) return;
+  currentLightboxIndex = (currentLightboxIndex + direction + currentVisibleBuilds.length) % currentVisibleBuilds.length;
+  displayInLightbox(currentVisibleBuilds[currentLightboxIndex]);
 }
 
 function closeLightbox() {
@@ -189,7 +221,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('lightbox').addEventListener('click', (e) => {
     if (e.target.id === 'lightbox') closeLightbox();
   });
+  document.getElementById('lightboxPrevBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    navigateLightbox(-1);
+  });
+  document.getElementById('lightboxNextBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    navigateLightbox(1);
+  });
   document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
   });
 });
