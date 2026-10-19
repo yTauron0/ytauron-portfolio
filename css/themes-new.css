@@ -1,0 +1,196 @@
+/* ==================================================
+   TEMAS NUEVOS (misma estructura que tenía Bruma Dorada:
+   paneles de vidrio redondeados, tarjetas suaves, botones en píldora).
+   Solo cambian colores, fondos y tipografías.
+
+   cobalto → azul cobalto intenso, humo pálido, puntos coral diminutos
+   aire    → grafito/negro con blanco perlado: acolchado y pulso (Aire Gélido)
+   ================================================== */
+
+/* ====================================================
+   COBALTO — aire helado, silencio, respirar hondo
+   ==================================================== */
+html[data-theme="cobalto"] {
+  --bg-deep: #030b34;
+  --amber: #7fb2ff;
+  --amber-soft: #d4e8ff;
+  --moon: #a9c8ff;
+  --ink: #f1f7ff;
+  --ink-dim: #a9bde6;
+  --glass: rgba(8, 28, 120, 0.5);
+  --glass-border: rgba(190, 220, 255, 0.24);
+  --overlay-color: 3, 11, 52;
+  --on-accent: #04123f;
+  --coral: #ff6f61;
+  --font-title: 'Unbounded', 'Hanken Grotesk', sans-serif;
+  --font-display: 'Unbounded', 'Hanken Grotesk', sans-serif;
+  --font-body: 'Hanken Grotesk', 'Sora', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+/* Fondo fijo: degradé cobalto + puntos coral que flotan muy lento */
+html[data-theme="cobalto"] .theme-bg {
+  overflow: hidden;
+  background:
+    radial-gradient(900px 600px at 80% 8%, rgba(60, 120, 255, 0.32), transparent 70%),
+    radial-gradient(800px 700px at 10% 90%, rgba(20, 60, 200, 0.3), transparent 70%),
+    linear-gradient(180deg, #0a2394 0%, #061a73 45%, #030b34 100%);
+}
+html[data-theme="cobalto"] .theme-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/themes/cobalto-dots.svg') 0 0 / 640px 640px repeat;
+  opacity: 0.7;
+}
+html[data-theme="cobalto"] .theme-bg::after {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(ellipse 45% 32% at 70% 55%, rgba(212, 232, 255, 0.12), transparent 70%);
+  animation: cobalto-breathe 10s ease-in-out infinite;
+}
+@keyframes cobalto-breathe { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+html[data-theme="cobalto"] #particles { display: none; }
+
+/* Misma jerarquía que Bruma Dorada, tipografía propia */
+html[data-theme="cobalto"] #title { font-weight: 300; font-size: clamp(2.6rem, 7vw, 4.2rem); letter-spacing: -0.02em; text-shadow: 0 0 44px rgba(127, 178, 255, 0.5); }
+html[data-theme="cobalto"] h2, html[data-theme="cobalto"] h3 { font-weight: 300; letter-spacing: -0.01em; }
+html[data-theme="cobalto"] h2 { font-size: clamp(1.4rem, 3.2vw, 2rem); }
+html[data-theme="cobalto"] .eyebrow, html[data-theme="cobalto"] .filter-btn { letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; }
+html[data-theme="cobalto"] .rama, html[data-theme="cobalto"] .corner-decor { display: none; }
+
+/* Punto coral como viñeta */
+html[data-theme="cobalto"] .dot { background: var(--coral); box-shadow: 0 0 10px var(--coral); }
+
+html[data-theme="cobalto"] .panel {
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(34, 74, 190, 0.78), rgba(6, 22, 96, 0.82));
+  box-shadow: 0 30px 90px rgba(4, 14, 80, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+html[data-theme="cobalto"] .btn { letter-spacing: 0.04em; }
+html[data-theme="cobalto"] .btn-primary {
+  position: relative;
+  background: linear-gradient(135deg, #cfe5ff, #6aa4ff);
+  border-color: transparent;
+  color: #04123f;
+  box-shadow: 0 10px 30px rgba(100, 160, 255, 0.4);
+}
+html[data-theme="cobalto"] .btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 7px; right: 14px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+html[data-theme="cobalto"] .btn-ghost { background: rgba(255, 255, 255, 0.1); }
+html[data-theme="cobalto"] .filter-btn { background: rgba(20, 52, 160, 0.7); border-color: rgba(190, 220, 255, 0.26); }
+html[data-theme="cobalto"] .filter-btn.active::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--coral);
+  vertical-align: middle;
+}
+
+html[data-theme="cobalto"] .bento-item,
+html[data-theme="cobalto"] .project-hero,
+html[data-theme="cobalto"] .gallery-thumb {
+  border-radius: 26px;
+  border-color: rgba(190, 220, 255, 0.22);
+  box-shadow: 0 22px 60px rgba(2, 8, 50, 0.55), 0 0 50px rgba(100, 160, 255, 0.1);
+}
+html[data-theme="cobalto"] .bento-item:hover { box-shadow: 0 28px 80px rgba(2, 8, 50, 0.6), 0 0 70px rgba(127, 178, 255, 0.4); }
+html[data-theme="cobalto"] .bento-item img { filter: saturate(1.05) contrast(1.04); }
+html[data-theme="cobalto"] .item-overlay { background: linear-gradient(to top, rgba(3, 11, 52, 0.9) 0%, rgba(3, 11, 52, 0.1) 55%, transparent 100%); padding: 20px; }
+html[data-theme="cobalto"] .item-title { font-weight: 300; font-size: 1.1rem; }
+
+/* ====================================================
+   AIRE GÉLIDO — tensión, pulso, blanco perlado sobre negro
+   Es oscuro a propósito: así todo el texto se lee con
+   contraste alto en cualquier parte de la página.
+   ==================================================== */
+html[data-theme="aire"] {
+  --bg-deep: #07090c;
+  --amber: #e9f1f7;
+  --amber-soft: #ffffff;
+  --moon: #b7c4d1;
+  --ink: #f6f9fc;
+  --ink-dim: #a3b0bd;
+  --glass: rgba(18, 22, 28, 0.78);
+  --glass-border: rgba(233, 241, 247, 0.26);
+  --overlay-color: 7, 9, 12;
+  --on-accent: #07090c;
+  --font-title: 'Space Grotesk', 'Familjen Grotesk', sans-serif;
+  --font-display: 'Space Grotesk', 'Familjen Grotesk', sans-serif;
+  --font-body: 'Familjen Grotesk', 'Space Grotesk', sans-serif;
+  --font-mono: 'Martian Mono', monospace;
+}
+
+/* Fondo fijo: negro acolchado con botones perlados y un pulso que se expande desde el centro */
+html[data-theme="aire"] .theme-bg {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(233, 241, 247, 0.12), transparent 70%),
+    url('../assets/themes/aire-tile.svg') center top / 240px 240px repeat,
+    linear-gradient(180deg, #0e1217, #07090c);
+}
+html[data-theme="aire"] .theme-bg::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 70vmax; height: 70vmax;
+  margin: -35vmax 0 0 -35vmax;
+  border-radius: 50%;
+  border: 1px solid rgba(233, 241, 247, 0.5);
+  opacity: 0;
+  animation: aire-pulse 7s ease-out infinite;
+}
+@keyframes aire-pulse {
+  0%   { transform: scale(0.15); opacity: 0.45; }
+  100% { transform: scale(1);    opacity: 0; }
+}
+html[data-theme="aire"] #particles { display: none; }
+
+html[data-theme="aire"] #title { font-weight: 600; font-size: clamp(3rem, 8vw, 4.8rem); letter-spacing: -0.04em; }
+html[data-theme="aire"] h2, html[data-theme="aire"] h3 { font-weight: 600; letter-spacing: -0.03em; }
+html[data-theme="aire"] h2 { font-size: 1.12em; }
+html[data-theme="aire"] .eyebrow, html[data-theme="aire"] .filter-btn { letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+html[data-theme="aire"] .rama, html[data-theme="aire"] .corner-decor { display: none; }
+html[data-theme="aire"] .dot { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, 0.9); }
+
+html[data-theme="aire"] .panel {
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(40, 47, 58, 0.94), rgba(10, 13, 18, 0.96));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+html[data-theme="aire"] .btn { letter-spacing: 0.04em; font-weight: 600; }
+html[data-theme="aire"] .btn-primary {
+  background: linear-gradient(180deg, #ffffff, #cdd9e4);
+  border-color: transparent;
+  color: #07090c;
+  box-shadow: 0 10px 30px rgba(233, 241, 247, 0.28);
+}
+html[data-theme="aire"] .btn-primary:hover { background: #fff; }
+html[data-theme="aire"] .btn-ghost { background: rgba(255, 255, 255, 0.06); border-color: rgba(233, 241, 247, 0.55); }
+html[data-theme="aire"] .filter-btn { background: rgba(18, 22, 28, 0.92); border-color: rgba(233, 241, 247, 0.3); }
+
+html[data-theme="aire"] .bento-item,
+html[data-theme="aire"] .project-hero,
+html[data-theme="aire"] .gallery-thumb {
+  border-radius: 26px;
+  border-color: rgba(233, 241, 247, 0.3);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(233, 241, 247, 0.06);
+}
+html[data-theme="aire"] .bento-item:hover { box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(233, 241, 247, 0.3); }
+html[data-theme="aire"] .bento-item img { filter: saturate(0.92) contrast(1.06); }
+html[data-theme="aire"] .item-overlay { background: linear-gradient(to top, rgba(5, 7, 10, 0.92) 0%, rgba(5, 7, 10, 0.1) 55%, transparent 100%); padding: 20px; }
+html[data-theme="aire"] .item-title { font-weight: 600; font-size: 1.15rem; letter-spacing: -0.02em; }
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="cobalto"] .theme-bg::after,
+  html[data-theme="aire"] .theme-bg::after { animation: none; }
+}

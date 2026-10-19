@@ -1,0 +1,94 @@
+/* ==================================================
+   VISTA DE PROYECTO (se abre dentro de index.html, sin recargar → la música sigue)
+   ================================================== */
+body.view-project > .hero,
+body.view-project > .about,
+body.view-project > .contact-terms,
+body.view-project > .portfolio-section,
+body.view-project > .discord-floating-card { display: none !important; }
+
+.project-view[hidden] { display: none !important; }
+.project-view { animation: projectIn 0.6s var(--ease) both; }
+@keyframes projectIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+.project-inner { max-width: 1180px; margin: 0 auto; padding: 96px 24px 120px; }
+
+/* ---- Migas de pan ---- */
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-dim); }
+.crumbs button { padding: 2px 0; background: none; border: 0; color: var(--ink-dim); font: inherit; cursor: pointer; transition: color 0.2s ease; }
+.crumbs button:hover { color: var(--amber); }
+.crumb-current { color: var(--ink); }
+
+.project-title { margin: 0 0 14px; font-family: var(--font-title); font-size: clamp(1.8rem, 4.4vw, 3rem); font-weight: 600; line-height: 1.1; color: var(--ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.chip { padding: 4px 12px; border: 1px solid var(--glass-border); border-radius: 999px; background: var(--glass); font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber-soft); }
+.project-commission { margin-bottom: 8px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-dim); }
+
+/* Los paneles de esta vista ocupan todo el ancho y van alineados a la izquierda */
+.project-side, .project-inside, .project-review { max-width: none; width: 100%; text-align: left; }
+
+/* Miniaturas (las usan también la galería y los temas) */
+.gallery-thumb { position: relative; padding: 0; border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; background: #14141c; cursor: pointer; }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---- Imagen + tarjeta lateral ---- */
+.project-main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 26px; align-items: start; margin-top: 18px; }
+
+.project-hero { position: relative; border-radius: 20px; overflow: hidden; cursor: zoom-in; border: 1px solid var(--glass-border); background: #14141c; aspect-ratio: 16 / 10; }
+.project-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.zoom-hint { position: absolute; top: 14px; right: 14px; padding: 7px 12px; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; color: #f5f0e8; pointer-events: none; }
+
+.project-thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 12px; }
+.project-thumbs[hidden] { display: none; }
+.project-thumb { aspect-ratio: 4 / 3; border-radius: 10px; cursor: pointer; opacity: 0.7; transition: opacity 0.2s ease, border-color 0.2s ease; }
+.project-thumb::after { display: none; }
+.project-thumb:hover { transform: none; opacity: 1; }
+.project-thumb:hover img { transform: none; }
+.project-thumb.active { opacity: 1; border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+
+.project-side { position: sticky; top: 92px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; padding: 22px; }
+.project-side h2 { margin: 0; padding-bottom: 14px; border-bottom: 1px solid var(--glass-border); font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; line-height: 1.3; color: var(--ink); }
+.side-stat { display: flex; flex-direction: column; gap: 4px; }
+.side-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-dim); }
+.side-stat strong { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--amber); }
+.side-row { display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-dim); }
+.side-row b { color: var(--ink); font-weight: 600; }
+.side-stat[hidden], .side-row[hidden] { display: none; }
+.side-cta { width: 100%; justify-content: center; text-align: center; margin-top: 4px; }
+.project-side small { text-align: center; font-size: 0.72rem; color: var(--ink-dim); }
+
+/* ---- "Dentro de ..." ---- */
+.project-inside { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 26px; margin-top: 30px; padding: 26px; }
+.project-inside[hidden], .project-inside.no-images .inside-images { display: none; }
+.project-inside.no-images { grid-template-columns: 1fr; }
+.inside-text h2 { margin: 0 0 14px; font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; line-height: 1.2; color: var(--ink); }
+.inside-text p { margin: 0 0 12px; line-height: 1.7; font-size: 0.92rem; color: var(--ink-dim); }
+.inside-images { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.inside-img { padding: 0; border: 1px solid var(--glass-border); border-radius: 14px; overflow: hidden; background: #14141c; cursor: zoom-in; aspect-ratio: 3 / 4; }
+.inside-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease); }
+.inside-img:hover img { transform: scale(1.04); }
+
+/* ---- Opinión del cliente ---- */
+.project-review { box-sizing: border-box; margin-top: 22px; padding: 22px 26px; }
+.project-review h2 { margin: 0 0 14px; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--ink); }
+.review-empty { padding: 18px 20px; border: 1px solid var(--glass-border); border-radius: 14px; background: rgba(255,255,255,0.03); }
+.review-empty strong { display: block; color: var(--ink); }
+.review-empty p { margin: 6px 0 10px; font-size: 0.84rem; color: var(--ink-dim); }
+.review-empty a { font-size: 0.84rem; color: var(--amber); text-decoration: underline; text-underline-offset: 3px; }
+
+.more-link { display: inline-block; margin-top: 26px; padding: 4px 0; background: none; border: 0; border-bottom: 1px solid var(--amber); font-size: 0.86rem; color: var(--amber); cursor: pointer; }
+.more-link:hover { color: var(--amber-soft); border-color: var(--amber-soft); }
+
+.project-missing { text-align: center; padding: 120px 0; color: var(--ink-dim); }
+
+@media (max-width: 900px) {
+  .project-main { grid-template-columns: 1fr; }
+  .project-side { position: static; }
+  .project-inside { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .project-inner { padding: 84px 16px 100px; }
+  .project-thumbs { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .project-inside, .project-review { padding: 18px; }
+  .inside-images { grid-template-columns: 1fr 1fr; gap: 10px; }
+}

@@ -1,0 +1,80 @@
+{
+  "_ayuda": "Para cambiar la playlist de un tema pegá en \"playlist\" el link de Spotify (Compartir > Copiar enlace de la playlist). Si queda vacío usa default_playlist.",
+  "default_playlist": "spotify:playlist:6Xux2xcM7pATKcXVzvfLuI",
+  "themes": [
+    {
+      "id": "city",
+      "label_es": "Ciudad",
+      "label_en": "City",
+      "swatch": [
+        "#050813",
+        "#ffb057"
+      ],
+      "playlist": "https://open.spotify.com/playlist/0CxvFDs9Pg2Je86rmEXhmg?si=80ce638096844d57"
+    },
+    {
+      "id": "moon",
+      "label_es": "Luna",
+      "label_en": "Moon",
+      "swatch": [
+        "#06101a",
+        "#7ec8ff"
+      ],
+      "playlist": "https://open.spotify.com/playlist/3VlP53WdCG9heQttOimyx8?si=4c615b97e3af4e2e"
+    },
+    {
+      "id": "sepia",
+      "label_es": "Sepia",
+      "label_en": "Sepia",
+      "swatch": [
+        "#1a120a",
+        "#d9a066"
+      ],
+      "playlist": "https://open.spotify.com/playlist/5GmcJlfdKZmIFmcxiAZf3J?si=5901fde021e541cb"
+    },
+    {
+      "id": "gothic",
+      "label_es": "Catedral Nocturna",
+      "label_en": "Night Cathedral",
+      "swatch": [
+        "#07050a",
+        "#c9a45c"
+      ],
+      "playlist": "https://open.spotify.com/playlist/6G3ZZ8p85SRnIpxxef0jI1?si=41fe8de119244a81",
+      "fonts": "https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Cinzel:wght@400..700&family=Cormorant+Garamond:ital,wght@0,400..700;1,400..600&display=swap"
+    },
+    {
+      "id": "cobalto",
+      "label_es": "Cobalto",
+      "label_en": "Cobalt",
+      "swatch": [
+        "#0a2394",
+        "#ff6f61"
+      ],
+      "playlist": "https://open.spotify.com/playlist/4T5sDYG1z5ueg0P8pxXF1X?si=9dd209bc462f4c5e",
+      "fonts": "https://fonts.googleapis.com/css2?family=Unbounded:wght@200..500&family=Hanken+Grotesk:wght@300..700&family=DM+Mono:wght@400;500&display=swap"
+    },
+    {
+      "id": "aire",
+      "label_es": "Aire Gélido",
+      "label_en": "Frozen Air",
+      "swatch": [
+        "#0a0c10",
+        "#e9f1f7"
+      ],
+      "playlist": "https://open.spotify.com/playlist/3DlwfEhKMLQtvhGa8MWRSH?si=aa6ba5244c2d4f70",
+      "fonts": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Familjen+Grotesk:wght@400..700&family=Martian+Mono:wght@300..500&display=swap"
+    },
+    {
+      "id": "pop",
+      "label_es": "Pop Eléctrico",
+      "label_en": "Electric Pop",
+      "swatch": [
+        "#0b0b0f",
+        "#ffe91a"
+      ],
+      "playlist": "https://open.spotify.com/playlist/6byMwjZagzRPw16YDARsNY?si=09e3bdc1d82246dc",
+      "fonts": "https://fonts.googleapis.com/css2?family=Bowlby+One&family=Rubik:ital,wght@0,400..800;1,400..800&family=Space+Mono:wght@400;700&display=swap"
+    }
+  ]
+}

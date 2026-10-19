@@ -1,0 +1,34 @@
+[
+  {
+    "id": "estructuras",
+    "label_es": "Estructuras",
+    "label_en": "Structures",
+    "icon": "🏛️",
+    "description_es": "Construcciones grandes y proyectos detallados.",
+    "description_en": "Large builds and detailed projects."
+  },
+  {
+    "id": "lobby",
+    "label_es": "Lobbies",
+    "label_en": "Lobbies",
+    "icon": "🎮",
+    "description_es": "Lobbies y hubs para servidores.",
+    "description_en": "Lobbies and hubs for servers."
+  },
+  {
+    "id": "interior",
+    "label_es": "Interiores",
+    "label_en": "Interiors",
+    "icon": "🛋️",
+    "description_es": "Diseño de interiores y ambientación.",
+    "description_en": "Interior design and atmosphere."
+  },
+  {
+    "id": "decoraciones",
+    "label_es": "Decoraciones",
+    "label_en": "Decorations",
+    "icon": "🏺",
+    "description_es": "Detalles y piezas decorativas para ambientar.",
+    "description_en": "Decorative details and pieces to set the mood."
+  }
+]

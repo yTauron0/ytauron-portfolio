@@ -1,0 +1,271 @@
+/* ==================================================
+   TEMAS — tipografías, fondos y diseño por tema
+   Existentes (sin cambios): city · moon · sepia
+   Nuevos: gothic (Catedral Nocturna) · cobalto (Cobalto) · aire (Aire Gélido) — ver css/themes-new.css · pop (Pop Eléctrico)
+   ================================================== */
+
+/* ---------- Tipografías base (iguales a las de siempre) ---------- */
+:root {
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-title: var(--font-display);
+  --on-accent: #14141c;
+}
+
+html, body { background: var(--bg-deep); }
+body { background: transparent; }
+
+/* ---------- Capa de fondo del hero para temas nuevos ---------- */
+.hero-bg-c {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2.5s var(--ease);
+}
+html[data-theme="moon"] .hero-bg-a { opacity: 0; }
+html[data-theme="moon"] .hero-bg-b { opacity: 1; }
+html[data-theme="gothic"] .hero-bg-a, html[data-theme="gothic"] .hero-bg-b,
+html[data-theme="cobalto"] .hero-bg-a, html[data-theme="cobalto"] .hero-bg-b,
+html[data-theme="aire"] .hero-bg-a, html[data-theme="aire"] .hero-bg-b,
+html[data-theme="pop"] .hero-bg-a,    html[data-theme="pop"] .hero-bg-b { opacity: 0; }
+html[data-theme="gothic"] .hero-bg-c { background-image: url('../assets/themes/gothic.svg'); opacity: 1; }
+html[data-theme="cobalto"] .hero-bg-c { background-image: url('../assets/themes/cobalto.webp'); opacity: 1; }
+html[data-theme="aire"] .hero-bg-c { background-image: url('../assets/themes/aire.webp'); opacity: 1; }
+html[data-theme="pop"] .hero-bg-c    { background-image: url('../assets/themes/pop.svg');    opacity: 1; }
+
+/* Capa decorativa fija detrás de todo el contenido */
+.theme-bg { display: none; position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+html[data-theme="gothic"] .theme-bg, html[data-theme="cobalto"] .theme-bg, html[data-theme="aire"] .theme-bg, html[data-theme="pop"] .theme-bg { display: block; }
+
+/* =====================================================
+   CATEDRAL NOCTURNA (gothic)
+   ===================================================== */
+html[data-theme="gothic"] {
+  --bg-deep: #07050a;
+  --amber: #c9a45c;
+  --amber-soft: #e6cf94;
+  --moon: #d8cbe6;
+  --ink: #f0e7d6;
+  --ink-dim: #b9a99a;
+  --glass: rgba(22, 11, 19, 0.68);
+  --glass-border: rgba(201, 164, 92, 0.32);
+  --overlay-color: 8, 4, 10;
+  --on-accent: #1a0e08;
+  --font-title: 'UnifrakturCook', 'Cinzel', serif;
+  --font-display: 'Cinzel', 'Cormorant Garamond', serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Cinzel', serif;
+}
+html[data-theme="gothic"] body { font-size: 1.1rem; }
+html[data-theme="gothic"] .theme-bg {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(138, 31, 51, 0.18), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(201, 164, 92, 0.07), transparent 55%),
+    url('../assets/themes/gothic-tile.svg') center top / 140px 210px repeat;
+  opacity: 0.75;
+}
+html[data-theme="gothic"] #title, html[data-theme="gothic"] .nav-logo { letter-spacing: 0.02em; }
+html[data-theme="gothic"] #title { font-size: clamp(3rem, 8vw, 4.6rem); line-height: 1.05; }
+html[data-theme="gothic"] h2, html[data-theme="gothic"] h3 { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+html[data-theme="gothic"] .tagline, html[data-theme="gothic"] .about p, html[data-theme="gothic"] .portfolio-header p { font-size: 1.12em; }
+html[data-theme="gothic"] .eyebrow { letter-spacing: 0.28em; text-transform: uppercase; }
+
+html[data-theme="gothic"] .panel {
+  border-radius: 3px;
+  border-color: rgba(201, 164, 92, 0.5);
+  background: linear-gradient(180deg, rgba(34, 15, 26, 0.72), rgba(14, 7, 12, 0.78));
+  box-shadow: inset 0 0 0 5px rgba(7, 5, 10, 0.92), inset 0 0 0 6px rgba(201, 164, 92, 0.32), 0 24px 70px rgba(0, 0, 0, 0.65);
+}
+html[data-theme="gothic"] .panel::before,
+html[data-theme="gothic"] .panel::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 64px;
+  height: 30px;
+  transform: translateX(-50%);
+  background: url('../assets/themes/gothic-ornament.svg') center / contain no-repeat;
+  pointer-events: none;
+}
+html[data-theme="gothic"] .panel::before { top: -15px; }
+html[data-theme="gothic"] .panel::after  { bottom: -15px; }
+html[data-theme="gothic"] .rama, html[data-theme="gothic"] .corner-decor { display: none; }
+
+html[data-theme="gothic"] .btn { border-radius: 2px; text-transform: uppercase; letter-spacing: 0.14em; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; }
+html[data-theme="gothic"] .btn-primary { background: linear-gradient(180deg, #e6cf94, #b88f45); color: #1a0e08; border-color: #e6cf94; box-shadow: inset 0 0 0 2px rgba(26, 14, 8, 0.35); }
+html[data-theme="gothic"] .btn-primary:hover { background: linear-gradient(180deg, #f2dfa8, #c9a45c); }
+html[data-theme="gothic"] .btn-ghost { border-color: rgba(201, 164, 92, 0.55); color: var(--amber-soft); }
+
+html[data-theme="gothic"] .portfolio-header::after,
+html[data-theme="gothic"] .contact-terms-header::after {
+  content: '';
+  display: block;
+  width: min(360px, 80%);
+  height: 36px;
+  margin: 14px auto 0;
+  background: url('../assets/themes/gothic-divider.svg') center / contain no-repeat;
+}
+html[data-theme="gothic"] .filter-btn {
+  position: relative;
+  isolation: isolate;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 26px;
+  background: rgba(201, 164, 92, 0.65);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
+}
+html[data-theme="gothic"] .filter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background: #12090f;
+  clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
+}
+html[data-theme="gothic"] .filter-btn.active::before { background: var(--amber); }
+html[data-theme="gothic"] .filter-btn.active { color: var(--on-accent); }
+
+html[data-theme="gothic"] .bento-item,
+html[data-theme="gothic"] .project-hero,
+html[data-theme="gothic"] .gallery-thumb {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(201, 164, 92, 0.6), 0 0 0 5px #07050a, 0 0 0 6px rgba(201, 164, 92, 0.32), 0 14px 40px rgba(0, 0, 0, 0.55);
+}
+html[data-theme="gothic"] .bento-item img { filter: saturate(1.06) contrast(1.06); }
+html[data-theme="gothic"] .item-overlay { background: linear-gradient(to top, rgba(10, 4, 10, 0.95) 0%, rgba(10, 4, 10, 0.15) 58%, transparent 100%); padding: 22px 20px; }
+html[data-theme="gothic"] .item-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(201, 164, 92, 0.42);
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+html[data-theme="gothic"] .item-overlay::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 50%;
+  width: 46px; height: 20px;
+  transform: translateX(-50%);
+  background: url('../assets/themes/gothic-ornament.svg') center / contain no-repeat;
+}
+html[data-theme="gothic"] .bento-item:hover .item-overlay::before { border-color: var(--amber); }
+html[data-theme="gothic"] .item-title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.95rem; }
+
+/* =====================================================
+   POP ELÉCTRICO (pop)
+   ===================================================== */
+html[data-theme="pop"] {
+  --bg-deep: #0b0b0f;
+  --amber: #ffe91a;
+  --amber-soft: #fff27a;
+  --moon: #19c8ff;
+  --ink: #ffffff;
+  --ink-dim: #cfcfd6;
+  --glass: rgba(10, 10, 14, 0.8);
+  --glass-border: rgba(255, 233, 26, 0.42);
+  --overlay-color: 8, 8, 12;
+  --on-accent: #0b0b0f;
+  --pop-red: #ff2b3a;
+  --pop-green: #19e04b;
+  --pop-cyan: #19c8ff;
+  --font-title: 'Bowlby One', sans-serif;
+  --font-display: 'Rubik', sans-serif;
+  --font-body: 'Rubik', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+html[data-theme="pop"] .theme-bg {
+  background:
+    repeating-linear-gradient(-15deg, transparent 0 140px, rgba(25, 200, 255, 0.05) 140px 146px, transparent 146px 300px),
+    url('../assets/themes/pop-tile.svg') 0 0 / 44px 44px repeat;
+}
+html[data-theme="pop"] #title {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--amber);
+  font-size: clamp(2.8rem, 8vw, 4.4rem);
+  transform: skewX(-8deg);
+  text-shadow: 4px 4px 0 #000, 8px 8px 0 var(--pop-red);
+}
+html[data-theme="pop"] h2, html[data-theme="pop"] h3 { font-weight: 800; font-style: italic; text-transform: uppercase; letter-spacing: -0.01em; }
+html[data-theme="pop"] h2 { text-shadow: 3px 3px 0 var(--pop-red); }
+html[data-theme="pop"] .eyebrow { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+html[data-theme="pop"] .rama, html[data-theme="pop"] .corner-decor { display: none; }
+
+html[data-theme="pop"] .panel {
+  border-radius: 0;
+  border: 3px solid var(--amber);
+  background: rgba(10, 10, 14, 0.86);
+  box-shadow: 8px 8px 0 var(--pop-red), 16px 16px 0 var(--pop-cyan);
+}
+html[data-theme="pop"] .btn {
+  border-radius: 0;
+  border: 3px solid #000;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transform: skewX(-8deg);
+}
+html[data-theme="pop"] .btn-primary { background: var(--amber); color: #000; box-shadow: 5px 5px 0 var(--pop-cyan); }
+html[data-theme="pop"] .btn-ghost { background: #000; color: #fff; border-color: var(--pop-red); box-shadow: 5px 5px 0 var(--pop-green); }
+html[data-theme="pop"] .btn:hover { transform: skewX(-8deg) translate(-2px, -2px); }
+html[data-theme="pop"] .btn:active { transform: skewX(-8deg) translate(3px, 3px); box-shadow: none; }
+
+html[data-theme="pop"] .filter-btn { border-radius: 0; border: 2px solid var(--amber); background: #000; transform: skewX(-10deg); font-weight: 700; text-transform: uppercase; }
+html[data-theme="pop"] .filter-btn.active { background: var(--amber); color: #000; box-shadow: 4px 4px 0 var(--pop-cyan); }
+
+html[data-theme="pop"] .bento-item,
+html[data-theme="pop"] .project-hero,
+html[data-theme="pop"] .gallery-thumb {
+  --c: var(--amber);
+  border-radius: 0;
+  border: 3px solid var(--c);
+  box-shadow: 8px 8px 0 var(--c);
+}
+html[data-theme="pop"] .bento-item:nth-child(4n+2) { --c: var(--pop-cyan); }
+html[data-theme="pop"] .bento-item:nth-child(4n+3) { --c: var(--pop-red); }
+html[data-theme="pop"] .bento-item:nth-child(4n+4) { --c: var(--pop-green); }
+html[data-theme="pop"] .item-overlay { background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 100%); }
+html[data-theme="pop"] .item-overlay::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 7px;
+  background: linear-gradient(90deg, var(--pop-red) 0 25%, var(--pop-cyan) 25% 50%, var(--pop-green) 50% 75%, var(--amber) 75%);
+}
+html[data-theme="pop"] .item-title { font-style: italic; font-weight: 800; text-transform: uppercase; font-size: 1.1rem; }
+
+/* =====================================================
+   Colores que estaban fijos en el CSS → ahora siguen al tema (solo temas nuevos)
+   ===================================================== */
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .filter-btn { color: var(--ink); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .filter-btn:hover { border-color: var(--amber); color: var(--amber); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .filter-btn.active { background: var(--amber); border-color: var(--amber); color: var(--on-accent); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .bento-item:hover { border-color: var(--amber); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .item-category,
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .project-coords { color: var(--amber); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .item-title,
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .portfolio-header h2 { color: var(--ink); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .portfolio-header p { color: var(--ink-dim); }
+:is(html[data-theme="gothic"], html[data-theme="cobalto"], html[data-theme="aire"], html[data-theme="pop"]) .music-card { background: rgba(var(--overlay-color), 0.9); }
+
+/* Pop: el gótico y los temas fríos no necesitan ajustes extra en la vista de proyecto; el pop sí */
+html[data-theme="pop"] .project-hero { box-shadow: 10px 10px 0 var(--pop-red); }
+html[data-theme="pop"] .project-title { text-shadow: 4px 4px 0 #000, 7px 7px 0 var(--pop-red); }
+html[data-theme="pop"] .back-link, html[data-theme="pop"] .nav-btn { border-radius: 0; }
+
+@media (prefers-reduced-motion: reduce) { .hero-bg-c { transition: none; } }
+
+#title, .nav-logo, .project-title { font-family: var(--font-title); }

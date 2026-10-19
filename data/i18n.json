@@ -1,0 +1,182 @@
+{
+  "es": {
+    "hero": {
+      "eyebrow": "disponible para encargos",
+      "tagline": "Builder desde 2021 — estructuras, lobbies y arenas PvP con estilo propio.",
+      "cta_portfolio": "Ver Portfolio",
+      "cta_contact": "Contacto"
+    },
+    "about": {
+      "eyebrow": "sobre mí",
+      "title": "Quién está detrás de las builds",
+      "text": "Mi nombre es Julián — builder profesional de Minecraft, radicado en Chile, trabajando bajo el nombre <strong>yTauron</strong> desde 2021. Me especializo en estructuras — desde lobbies y arenas Box PvP hasta proyectos más grandes y detallados. Trabajo con herramientas profesionales de edición y modelado para Minecraft, que me permiten construir estructuras complejas, esculpir terreno natural y cuidar cada detalle de terminación, entregando resultados limpios y listos para encargos sin perder carácter en el camino.",
+      "discord_label": "builder en discord",
+      "add_me": "Agregarme",
+      "builds_count_label": "builds en el portafolio"
+    },
+    "portfolio": {
+      "eyebrow": "portfolio",
+      "title": "Builds recientes",
+      "subtitle": "Una selección de proyectos — filtrá por categoría.",
+      "filter_featured": "Destacados",
+      "empty": "Todavía no hay builds en esta categoría."
+    },
+    "contact": {
+      "eyebrow": "contacto",
+      "title": "Cómo trabajamos",
+      "subtitle": "Antes de escribirme, esto es lo que necesitás saber.",
+      "response_time_label": "Tiempo de respuesta",
+      "response_time_value": "12–24 horas",
+      "availability_label": "Disponibilidad",
+      "availability_value": "Lunes a viernes",
+      "method_label": "Medio de contacto",
+      "method_value": "Discord (único medio de contacto)",
+      "terms_toggle": "Ver términos y condiciones",
+      "terms_deposit": "Se pide el 50% del pago por adelantado antes de empezar el encargo, y el 50% restante antes de la entrega final.",
+      "terms_cancellation": "Si cancelás antes de que el trabajo haya comenzado, se devuelve el adelanto completo. Una vez que el build está en progreso, el adelanto no es reembolsable, ya que cubre el tiempo ya invertido.",
+      "terms_revisions": "El encargo incluye hasta 2 rondas de ajustes menores. Cambios grandes o fuera del pedido original se cotizan aparte.",
+      "terms_delivery": "El tiempo de entrega estimado es de alrededor de 1 semana, dependiendo del tamaño y complejidad del proyecto.",
+      "terms_payment": "El único medio de pago aceptado por ahora es PayPal.",
+      "terms_restrictions": "No se aceptan encargos que repliquen mapas o contenido con derechos de autor sin permiso, ni contenido ofensivo, NSFW o ilegal.",
+      "terms_ownership": "Una vez entregado, el build es 100% del cliente. yTauron se reserva el derecho de mostrarlo en su portafolio, acreditándose como el builder."
+    },
+    "visits": "visitas",
+    "lang_toggle": "EN",
+    "nav": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "portfolio": "Portfolio",
+      "contact": "Contacto",
+      "theme": "Tema"
+    },
+    "intro": {
+      "question": "¿Querés escuchar la playlist mientras explorás el portfolio?",
+      "yes": "🎵 Sí, con música",
+      "no": "Continuar sin música"
+    },
+    "project": {
+      "back": "← Volver al portfolio",
+      "more": "Más imágenes",
+      "photos": "imágenes",
+      "zoom": "🔍 Ampliar",
+      "cta_title": "¿Te gustó este build?",
+      "cta_text": "Contame tu idea y la hacemos realidad.",
+      "cta_button": "Encargá el tuyo",
+      "crumb_home": "Inicio",
+      "crumb_portfolio": "Portfolio",
+      "commission": "Comisión",
+      "hours": "Tiempo total de construcción",
+      "edition": "Edición",
+      "modded": "Con mods",
+      "yes": "Sí",
+      "no": "No",
+      "request": "Pedir un build similar",
+      "request_note": "Este proyecto se agregará a tu pedido.",
+      "inside": "Dentro de",
+      "client_title": "La opinión del cliente",
+      "client_empty": "Sé el primero en dejar una reseña",
+      "client_text": "Las reseñas se publican aquí cuando una comisión se completa en Discord.",
+      "client_cta": "Empezar un proyecto →",
+      "explore": "← Explorar más"
+    },
+    "viewer": {
+      "hint": "Rueda: zoom · Arrastrá para mover · Doble clic: acercar",
+      "zoom_in": "Acercar",
+      "zoom_out": "Alejar",
+      "reset": "Restablecer",
+      "close": "Cerrar",
+      "prev": "Anterior",
+      "next": "Siguiente"
+    }
+  },
+  "en": {
+    "hero": {
+      "eyebrow": "available for commissions",
+      "tagline": "Builder since 2021 — structures, lobbies, and PvP arenas with a signature style.",
+      "cta_portfolio": "View Portfolio",
+      "cta_contact": "Contact"
+    },
+    "about": {
+      "eyebrow": "about",
+      "title": "Who's behind the builds",
+      "text": "My name is Julián — professional Minecraft builder based in Chile, working under the name <strong>yTauron</strong> since 2021. I specialize in structures — from lobbies and Box PvP arenas to larger, detail-heavy projects. I work with professional Minecraft editing and modeling tools that let me build complex structures, sculpt natural terrain, and take care of every finishing detail, delivering clean, commission-ready results without losing character along the way.",
+      "discord_label": "builder on discord",
+      "add_me": "Add me",
+      "builds_count_label": "builds in the portfolio"
+    },
+    "portfolio": {
+      "eyebrow": "portfolio",
+      "title": "Recent builds",
+      "subtitle": "A selection of projects — filter by category.",
+      "filter_featured": "Featured",
+      "empty": "No builds in this category yet."
+    },
+    "contact": {
+      "eyebrow": "contact",
+      "title": "How we work",
+      "subtitle": "Before reaching out, here's what you should know.",
+      "response_time_label": "Response time",
+      "response_time_value": "12–24 hours",
+      "availability_label": "Availability",
+      "availability_value": "Monday to Friday",
+      "method_label": "Contact method",
+      "method_value": "Discord (only contact method)",
+      "terms_toggle": "View terms and conditions",
+      "terms_deposit": "A 50% deposit is required before starting the commission, with the remaining 50% due before final delivery.",
+      "terms_cancellation": "If you cancel before work has started, the full deposit is refunded. Once the build is in progress, the deposit is non-refundable, as it covers the time already invested.",
+      "terms_revisions": "The commission includes up to 2 rounds of minor adjustments. Major changes or requests outside the original scope are quoted separately.",
+      "terms_delivery": "Estimated delivery time is around 1 week, depending on the size and complexity of the project.",
+      "terms_payment": "The only payment method currently accepted is PayPal.",
+      "terms_restrictions": "Commissions that replicate copyrighted maps or content without permission, as well as offensive, NSFW, or illegal content, are not accepted.",
+      "terms_ownership": "Once delivered, the build is 100% the client's. yTauron reserves the right to showcase it in his portfolio, crediting himself as the builder."
+    },
+    "visits": "visits",
+    "lang_toggle": "ES",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "portfolio": "Portfolio",
+      "contact": "Contact",
+      "theme": "Theme"
+    },
+    "intro": {
+      "question": "Would you like to listen to the playlist while you explore the portfolio?",
+      "yes": "🎵 Yes, with music",
+      "no": "Continue without music"
+    },
+    "project": {
+      "back": "← Back to portfolio",
+      "more": "More images",
+      "photos": "images",
+      "zoom": "🔍 Enlarge",
+      "cta_title": "Like this build?",
+      "cta_text": "Tell me your idea and let's make it real.",
+      "cta_button": "Commission yours",
+      "crumb_home": "Home",
+      "crumb_portfolio": "Portfolio",
+      "commission": "Commission",
+      "hours": "Total build time",
+      "edition": "Edition",
+      "modded": "Modded",
+      "yes": "Yes",
+      "no": "No",
+      "request": "Request a similar build",
+      "request_note": "This project will be added to your request.",
+      "inside": "Inside",
+      "client_title": "The client's perspective",
+      "client_empty": "Be the first to leave a review",
+      "client_text": "Reviews are published here when a commission is completed on Discord.",
+      "client_cta": "Start a project →",
+      "explore": "← Explore more"
+    },
+    "viewer": {
+      "hint": "Wheel: zoom · Drag to move · Double-click: zoom in",
+      "zoom_in": "Zoom in",
+      "zoom_out": "Zoom out",
+      "reset": "Reset",
+      "close": "Close",
+      "prev": "Previous",
+      "next": "Next"
+    }
+  }
+}

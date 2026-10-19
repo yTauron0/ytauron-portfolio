@@ -1,0 +1,35 @@
+[
+  {
+    "id": 44,
+    "title_es": "Verdant Citadel",
+    "title_en": "Verdant Citadel",
+    "category": "lobby",
+    "image": "assets/images/verdant-citadel/verdant-citadel-2.jpg",
+    "size": "large",
+    "coords": "",
+    "description_es": "Hub de servidor de fantasía: gran salón central, torres, plaza con mercado y un monolito flotante como punto de spawn. Pensado para que el jugador sepa a dónde ir desde el primer segundo.",
+    "description_en": "Fantasy server hub: a large central hall, towers, a market square, and a floating monolith serving as the spawn point. Designed so that players know exactly where to go from the very first second.",
+    "featured": true,
+    "tags_es": ["Lobby", "Fantasía", "Hub"],
+    "tags_en": ["Lobby", "Fantasy", "Hub"],
+    "thumb": "assets/images/verdant-citadel/verdant-citadel-2-thumb.jpg",
+    "gallery": [
+      {
+        "image": "assets/images/verdant-citadel/verdant-citadel-1.jpg",
+        "thumb": "assets/images/verdant-citadel/verdant-citadel-1-thumb.jpg"
+      },
+      {
+        "image": "assets/images/verdant-citadel/verdant-citadel-3.jpg",
+        "thumb": "assets/images/verdant-citadel/verdant-citadel-3-thumb.jpg"
+      },
+      {
+        "image": "assets/images/verdant-citadel/verdant-citadel-4.jpg",
+        "thumb": "assets/images/verdant-citadel/verdant-citadel-4-thumb.jpg"
+      },
+      {
+        "image": "assets/images/verdant-citadel/verdant-citadel-5.jpg",
+        "thumb": "assets/images/verdant-citadel/verdant-citadel-5-thumb.jpg"
+      }
+    ]
+  }
+]

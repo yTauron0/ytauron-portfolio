@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>yTauron — Minecraft Builder Portfolio</title>
+<meta name="description" content="Portfolio de yTauron (Julián), builder profesional de Minecraft. Estructuras, lobbies y arenas PvP con estilo propio, desde 2021.">
+<meta name="author" content="Julián — yTauron">
+
+<!-- Open Graph (previews en Discord, WhatsApp, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="yTauron — Minecraft Builder Portfolio">
+<meta property="og:description" content="Builder profesional de Minecraft desde 2021 — estructuras, lobbies y arenas PvP con estilo propio.">
+<meta property="og:image" content="https://ytauron0.github.io/ytauron-portfolio/assets/images/escena-1.jpg">
+<meta property="og:url" content="https://ytauron0.github.io/ytauron-portfolio/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+<script>
+/* Elige el tema ANTES de pintar la página (sin parpadeo).
+   - Al cargar: tema al azar.
+   - Si la persona eligió uno a mano, se mantiene durante la sesión. */
+(function () {
+  var IDS = ['city', 'moon', 'sepia', 'gothic', 'cobalto', 'aire', 'pop'];
+  var t = 'city';
+  try {
+    var cur = sessionStorage.getItem('ytauron_theme');
+    var user = sessionStorage.getItem('ytauron_theme_user') === '1';
+    t = (cur && IDS.indexOf(cur) > -1 && user) ? cur : IDS[Math.floor(Math.random() * IDS.length)];
+    sessionStorage.setItem('ytauron_theme', t);
+  } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/portfolio.css">
+<link rel="stylesheet" href="css/themes.css">
+<link rel="stylesheet" href="css/themes-new.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/viewer.css">
+<link rel="stylesheet" href="css/project.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="curtain-intro" id="curtainIntro">
+  <div class="curtain-greeting" id="curtainGreeting">
+    <span class="greeting-text greeting-es">¡Bienvenido!</span>
+    <span class="greeting-text greeting-en">Welcome!</span>
+  </div>
+  <div class="curtain-ask" id="curtainAsk">
+    <p class="curtain-ask-title" data-i18n="intro.question">¿Querés escuchar la playlist mientras explorás el portfolio?</p>
+    <div class="curtain-ask-actions">
+      <button class="btn btn-primary" id="introMusicYes" data-i18n="intro.yes">🎵 Sí, con música</button>
+      <button class="btn btn-ghost" id="introMusicNo" data-i18n="intro.no">Continuar sin música</button>
+    </div>
+    <button class="curtain-ask-lang" data-lang-toggle>EN</button>
+  </div>
+</div>
+
+<div class="theme-bg" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <nav class="nav-inner" aria-label="Principal">
+    <a href="index.html#hero" class="nav-logo">yTauron</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-panel" id="navPanel">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#hero" data-nav="hero" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="index.html#about" data-nav="about" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="index.html#portfolio" data-nav="portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="index.html#contact" data-nav="contact" class="nav-cta" data-i18n="nav.contact">Contacto</a></li>
+      </ul>
+      <div class="nav-controls">
+        <div class="theme-picker" id="themePicker">
+          <button class="nav-btn" id="themeBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r="1.2"/><circle cx="17.5" cy="10.5" r="1.2"/><circle cx="8.5" cy="7.5" r="1.2"/><circle cx="6.5" cy="12.5" r="1.2"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.3-.5-.7-.5-1.1 0-.8.7-1.5 1.5-1.5H16c3.3 0 6-2.7 6-6 0-4.4-4.5-7.8-10-7.8z"/></svg>
+            <span id="themeBtnLabel"></span>
+          </button>
+          <ul class="theme-menu" id="themeMenu" role="listbox"></ul>
+        </div>
+        <button class="nav-btn sound-toggle" id="soundToggle" type="button" aria-label="Sonidos">🔊</button>
+        <button class="nav-btn" data-lang-toggle type="button">EN</button>
+      </div>
+    </div>
+  </nav>
+</header>
+<section class="hero" id="hero">
+  <div class="hero-bg-a"></div>
+  <div class="hero-bg-b"></div>
+  <div class="hero-bg-c"></div>
+  <div class="hero-overlay"></div>
+  <canvas id="particles"></canvas>
+
+  <div class="hero-content">
+    <div class="discord-anchor" id="discordAnchorHero" aria-hidden="true"></div>
+    <div class="panel">
+      <div class="rama">
+        <svg viewBox="0 0 220 170" fill="none">
+          <path d="M210,10 C170,20 150,45 120,55 C90,65 70,80 55,95" stroke="#6b4a2a" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+          <circle cx="205" cy="14" r="5" fill="#ffb057" opacity="0.9"/>
+          <circle cx="180" cy="26" r="7" fill="#ffd27a" opacity="0.85"/>
+          <circle cx="155" cy="20" r="4" fill="#ffb057" opacity="0.7"/>
+          <circle cx="130" cy="48" r="6" fill="#ffd27a" opacity="0.8"/>
+          <circle cx="95" cy="72" r="5" fill="#ffb057" opacity="0.75"/>
+        </svg>
+      </div>
+
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">available for commissions</span></div>
+      <h1 id="title">yTauron</h1>
+      <p class="tagline" id="tagline" data-i18n="hero.tagline">Builder since 2021 — structures, lobbies, and PvP arenas with a signature style.</p>
+      <div class="cta-row">
+        <a href="#portfolio" class="btn btn-primary" data-i18n="hero.cta_portfolio">View Portfolio</a>
+        <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="hero.cta_contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid reveal-stagger">
+
+    <div class="panel about-text">
+      <div class="corner-decor top-right" aria-hidden="true">
+        <svg viewBox="0 0 140 100" fill="none">
+          <path d="M130,8 C100,14 80,30 60,38 C40,46 25,58 15,70" stroke="#ffb057" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <circle cx="128" cy="10" r="3" fill="#ffb057" opacity="0.8"/>
+          <circle cx="105" cy="18" r="4" fill="#ffd27a" opacity="0.7"/>
+          <circle cx="80" cy="32" r="2.5" fill="#ffb057" opacity="0.6"/>
+          <circle cx="55" cy="45" r="3" fill="#ffd27a" opacity="0.65"/>
+        </svg>
+      </div>
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="about.eyebrow">about</span></span>
+      <h2 data-i18n="about.title">Who's behind the builds</h2>
+      <p data-i18n-html="about.text"></p>
+      <div class="stats-row">
+        <span class="stat-number" id="buildsCounter">0</span>
+        <span class="stat-label" data-i18n="about.builds_count_label">builds en el portafolio</span>
+      </div>
+    </div>
+
+    <div class="discord-card-slot" id="discordAnchorAbout" aria-hidden="true"></div>
+
+  </div>
+</section>
+
+<section class="contact-terms" id="contact">
+  <div class="contact-terms-header reveal">
+    <span class="eyebrow"><span class="dot"></span><span data-i18n="contact.eyebrow">contact</span></span>
+    <h2 data-i18n="contact.title">Cómo trabajamos</h2>
+    <p data-i18n="contact.subtitle">Antes de escribirme, esto es lo que necesitás saber.</p>
+  </div>
+
+  <div class="contact-terms-grid reveal-stagger">
+    <div class="panel contact-info-card">
+      <div class="corner-decor top-right" aria-hidden="true">
+        <svg viewBox="0 0 140 100" fill="none">
+          <path d="M130,8 C100,14 80,30 60,38 C40,46 25,58 15,70" stroke="#ffb057" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <circle cx="128" cy="10" r="3" fill="#ffb057" opacity="0.8"/>
+          <circle cx="105" cy="18" r="4" fill="#ffd27a" opacity="0.7"/>
+          <circle cx="80" cy="32" r="2.5" fill="#ffb057" opacity="0.6"/>
+          <circle cx="55" cy="45" r="3" fill="#ffd27a" opacity="0.65"/>
+        </svg>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label" data-i18n="contact.response_time_label">Tiempo de respuesta</span>
+        <span class="contact-info-value" data-i18n="contact.response_time_value">12–24 horas</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label" data-i18n="contact.availability_label">Disponibilidad</span>
+        <span class="contact-info-value" data-i18n="contact.availability_value">Lunes a viernes</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label" data-i18n="contact.method_label">Medio de contacto</span>
+        <span class="contact-info-value" data-i18n="contact.method_value">Discord (único medio de contacto)</span>
+      </div>
+      <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="hero.cta_contact">Contact</a>
+    </div>
+
+    <div class="panel terms-card">
+      <div class="corner-decor bottom-left" aria-hidden="true">
+        <svg viewBox="0 0 140 100" fill="none">
+          <path d="M130,8 C100,14 80,30 60,38 C40,46 25,58 15,70" stroke="#ffb057" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <circle cx="128" cy="10" r="3" fill="#ffb057" opacity="0.8"/>
+          <circle cx="105" cy="18" r="4" fill="#ffd27a" opacity="0.7"/>
+          <circle cx="80" cy="32" r="2.5" fill="#ffb057" opacity="0.6"/>
+          <circle cx="55" cy="45" r="3" fill="#ffd27a" opacity="0.65"/>
+        </svg>
+      </div>
+      <button class="terms-toggle" id="termsToggleBtn" aria-expanded="false" aria-controls="termsContentWrap">
+        <span data-i18n="contact.terms_toggle">Ver términos y condiciones</span>
+        <span class="terms-toggle-icon">＋</span>
+      </button>
+      <div class="terms-content-wrap" id="termsContentWrap">
+        <div class="terms-content" id="termsContent">
+          <ul>
+            <li data-i18n="contact.terms_deposit"></li>
+            <li data-i18n="contact.terms_cancellation"></li>
+            <li data-i18n="contact.terms_revisions"></li>
+            <li data-i18n="contact.terms_delivery"></li>
+            <li data-i18n="contact.terms_payment"></li>
+            <li data-i18n="contact.terms_restrictions"></li>
+            <li data-i18n="contact.terms_ownership"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio-section" id="portfolio">
+  <div class="portfolio-header reveal">
+    <span class="eyebrow"><span class="dot"></span><span data-i18n="portfolio.eyebrow">portfolio</span></span>
+    <h2 data-i18n="portfolio.title">Builds recientes</h2>
+    <p data-i18n="portfolio.subtitle">Una selección de proyectos — filtrá por categoría.</p>
+  </div>
+
+  <div class="filter-bar reveal" id="filterBar"></div>
+
+  <div class="bento-grid" id="bentoGrid"></div>
+  <p class="grid-empty" id="gridEmpty" hidden data-i18n="portfolio.empty">Todavía no hay builds en esta categoría.</p>
+</section>
+
+<section class="project-view" id="projectView" hidden>
+  <div class="project-inner">
+
+    <nav class="crumbs" aria-label="breadcrumb">
+      <button type="button" id="crumbHome" data-i18n="project.crumb_home">Inicio</button><span>/</span>
+      <button type="button" id="crumbPortfolio" data-i18n="project.crumb_portfolio">Portfolio</button><span>/</span>
+      <button type="button" id="crumbCat"></button><span>/</span>
+      <span class="crumb-current" id="crumbTitle" aria-current="page"></span>
+    </nav>
+
+    <h1 class="project-title" id="projectTitle"></h1>
+    <div class="chips" id="projectTags"></div>
+    <div class="project-commission" id="projectCommission" hidden></div>
+
+    <div class="project-main">
+      <div class="project-media">
+        <div class="project-hero" id="projectHero" tabindex="0" role="button">
+          <img id="projectPreview" src="" alt="">
+          <span class="zoom-hint" data-i18n="project.zoom">🔍 Ampliar</span>
+        </div>
+        <div class="project-thumbs" id="projectGallery"></div>
+      </div>
+
+      <aside class="project-side panel">
+        <h2 id="sideTitle"></h2>
+        <div class="side-stat" id="hoursRow" hidden>
+          <span class="side-label" data-i18n="project.hours">Tiempo total de construcción</span>
+          <strong id="projectHours"></strong>
+        </div>
+        <div class="side-row" id="editionRow" hidden><span data-i18n="project.edition">Edición</span><b id="projectEdition"></b></div>
+        <div class="side-row" id="moddedRow" hidden><span data-i18n="project.modded">Con mods</span><b id="projectModded"></b></div>
+        <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-primary side-cta"><span data-i18n="project.request">Pedir un build similar</span> ↗</a>
+        <small data-i18n="project.request_note">Este proyecto se agregará a tu pedido.</small>
+      </aside>
+    </div>
+
+    <section class="project-inside panel" id="projectInside">
+      <div class="inside-text">
+        <h2 id="insideTitle"></h2>
+        <div id="projectDesc"></div>
+      </div>
+      <div class="inside-images" id="insideImages"></div>
+    </section>
+
+    <section class="project-review panel">
+      <h2 data-i18n="project.client_title">La opinión del cliente</h2>
+      <div class="review-empty">
+        <strong data-i18n="project.client_empty">Sé el primero en dejar una reseña</strong>
+        <p data-i18n="project.client_text">Las reseñas se publican aquí cuando una comisión se completa en Discord.</p>
+        <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" data-i18n="project.client_cta">Empezar un proyecto →</a>
+      </div>
+    </section>
+
+    <button class="more-link" id="projectMore" type="button"></button>
+  </div>
+</section>
+
+<button class="music-toggle" id="musicToggle" type="button"
+        aria-label="Música" aria-expanded="false" aria-controls="musicCardWrap">🎵</button>
+
+<div class="music-card" id="musicCardWrap">
+  <div id="musicCard"></div>
+</div>
+
+<div class="visit-counter" id="visitCounter">
+  <span class="visit-dot"></span>
+  <span id="visitCount">—</span> <span data-i18n="visits">visits</span>
+</div>
+
+
+<div class="discord-floating-card" id="discordFloatingCard">
+  <div class="discord-floating-avatar-wrap">
+    <img id="discordBubbleAvatar" class="discord-bubble-avatar" src="" alt="Avatar de Discord">
+    <span id="discordBubbleStatusDot" class="discord-status-dot"></span>
+    <span class="sparkle sparkle-1">✦</span>
+    <span class="sparkle sparkle-2">✦</span>
+    <span class="sparkle sparkle-3">✦</span>
+    <span class="sparkle sparkle-4">✦</span>
+  </div>
+  <div class="discord-floating-name" id="discordBubbleName">yTauron</div>
+  <div class="discord-bubble-status" id="discordBubbleStatus">Cargando estado...</div>
+
+  <div class="discord-subcard" id="discordSubcard">
+    <img id="discordSubcardAvatar" class="discord-subcard-avatar" src="" alt="">
+    <div class="discord-subcard-info">
+      <div class="discord-subcard-username" id="discordSubcardUsername">@usuario</div>
+      <div class="discord-subcard-activity" id="discordSubcardActivity">cargando...</div>
+    </div>
+  </div>
+
+  <a href="https://discord.com/users/847591632890363954" target="_blank" rel="noopener" class="btn btn-ghost btn-small discord-floating-addme" id="discordAddMeBtn" data-i18n="about.add_me">Add me</a>
+</div>
+
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script src="js/vendor/lenis.min.js" defer></script>
+<script src="js/scroll.js" defer></script>
+<script src="js/i18n.js" defer></script>
+<script src="js/themes.js" defer></script>
+<script src="js/nav.js" defer></script>
+<script src="js/viewer.js" defer></script>
+<script src="js/portfolio.js" defer></script>
+<script src="js/project.js" defer></script>
+<script src="js/perf.js" defer></script>
+<script src="js/sound.js" defer></script>
+<script src="js/script.js" defer></script>
+<script data-goatcounter="https://ytauron-portfolio.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
